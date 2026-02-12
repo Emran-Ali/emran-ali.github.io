@@ -40,6 +40,8 @@
         background: var(--primary);
         color: var(--text);
         overflow-x: hidden;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE and Edge */
       }
 
       h1,
@@ -75,15 +77,58 @@
         z-index: 1;
       }
 
-      .glow {
-        box-shadow: 0 0 20px rgba(100, 255, 218, 0.3);
+      /* REVEAL ANIMATION LAYOUT */
+      .reveal-container {
+        position: relative;
+        height: 200vh; /* Allows scrolling to reveal content */
       }
 
-      .section-title {
-        font-family: "Playfair Display", serif;
-        font-size: 3rem;
-        color: var(--text-white);
-        font-weight: 700;
+      /* Content sections - fixed background layer */
+      .content-sections {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+        z-index: 1;
+      }
+
+      .content-sections::-webkit-scrollbar,
+      .reveal-container::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera */
+      }
+
+      /* Inner wrapper to hold all content sections */
+      .content-wrapper {
+        width: 100%;
+        min-height: 100%;
+      }
+
+      /* Hero section - scrolling top layer */
+      #hero {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        min-height: 100vh;
+        z-index: 2;
+        background: var(--primary);
+        box-shadow: 0px 50px 100px rgba(0, 0, 0, 0.8);
+      }
+
+      /* Ensure all main sections have minimum height and proper spacing */
+      #about,
+      #experience,
+      #projects,
+      #skills,
+      #solutions,
+      #contact {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
       }
 
       .skill-tag {
@@ -141,18 +186,6 @@
         left: 7px;
         top: 16px;
         bottom: 0;
-      }
-
-      .custom-cursor {
-        width: 20px;
-        height: 20px;
-        border: 2px solid var(--accent);
-        border-radius: 50%;
-        position: fixed;
-        pointer-events: none;
-        z-index: 9999;
-        transition: all 0.1s ease;
-        transform: translate(-50%, -50%);
       }
 
       .accent-line {
@@ -214,12 +247,15 @@
         .accent-line {
           width: 150px;
         }
+
+        .reveal-container {
+          height: 250vh; /* More space on mobile */
+        }
       }
     </style>
   </head>
   <body>
     <div class="noise-bg"></div>
-    <div class="custom-cursor" id="cursor"></div>
 
     <!-- Navigation -->
     <nav
@@ -262,1248 +298,1247 @@
             >
           </div>
           <button class="md:hidden text-accent">
-            <svg
-              class="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h16"
-              ></path>
-            </svg>
+            <i class="fas fa-bars text-xl"></i>
           </button>
         </div>
       </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section
-      class="min-h-screen flex items-center justify-center px-6 relative overflow-hidden mt-20 md:mt-0"
-    >
-      <div
-        class="absolute top-20 right-20 w-96 h-96 bg-accent/5 rounded-full blur-3xl"
-      ></div>
-      <div
-        class="absolute bottom-20 left-20 w-96 h-96 bg-accent-alt/5 rounded-full blur-3xl"
-      ></div>
-
-      <div
-        class="max-w-7xl mx-auto relative z-10 flex flex-col-reverse md:flex-row gap-8"
+    <!-- REVEAL ANIMATION CONTAINER -->
+    <div class="reveal-container">
+      <!-- Hero Section - Top Layer that scrolls away -->
+      <section
+        id="hero"
+        class="min-h-screen flex items-center justify-center px-6 relative overflow-hidden"
       >
         <div
-          class="hero-photo w-96 rounded-full"
-          style="opacity: 0; transform: scale(0.8) translateX(-50px)"
-        >
-          <img
-            src="image/me.jpeg"
-            class="w-full h-full object-cover rounded-md"
-            alt="emran"
-          />
-        </div>
-        <div class="hero-content">
-          <p
-            class="text-accent mb-4 tracking-wider"
-            style="opacity: 0; transform: translateY(20px)"
-          >
-            Hello, I'm
-          </p>
-          <h1
-            class="text-6xl md:text-8xl font-black mb-6 text-text-white"
-            style="opacity: 0; transform: translateY(20px)"
-          >
-            Md Emran Ali
-          </h1>
-          <h2
-            class="text-3xl md:text-5xl mb-8 gradient-text font-bold"
-            style="opacity: 0; transform: translateY(20px)"
-          >
-            Full Stack Developer
-          </h2>
-          <p
-            class="text-xl text-text max-w-2xl mb-12 leading-relaxed"
-            style="opacity: 0; transform: translateY(20px)"
-          >
-            Crafting elegant digital experiences with modern web technologies.
-            Specialized in building scalable applications with Laravel, React,
-            and NextJS.
-          </p>
-          <div
-            class="flex gap-6 flex-wrap"
-            style="opacity: 0; transform: translateY(20px)"
-          >
-            <a
-              href="#contact"
-              class="btn-primary px-8 py-4 rounded-lg font-semibold relative z-0"
-            >
-              Get In Touch
-            </a>
-            <a
-              href="#projects"
-              class="px-8 py-4 rounded-lg font-semibold border-2 border-text-light/30 text-text-light hover:border-accent hover:text-accent transition"
-            >
-              View Projects
-            </a>
-          </div>
-          <div
-            class="flex gap-6 mt-12"
-            style="opacity: 0; transform: translateY(20px)"
-          >
-            <a
-              href="https://github.com/Emran-Ali"
-              target="_blank"
-              class="text-text-light hover:text-accent transition transform hover:scale-110"
-            >
-              <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-                <path
-                  d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
-                />
-              </svg>
-            </a>
-            <a
-              href="https://www.linkedin.com/in/itsemran/"
-              target="_blank"
-              class="text-text-light hover:text-accent transition transform hover:scale-110"
-            >
-              <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-                <path
-                  d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
-                />
-              </svg>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-32 px-6 relative">
-      <div class="max-w-7xl mx-auto">
+          class="absolute top-20 right-20 w-96 h-96 bg-accent/5 rounded-full blur-3xl"
+        ></div>
         <div
-          class="flex items-center gap-4 mb-16 about-header"
-          style="opacity: 0"
+          class="absolute bottom-20 left-20 w-96 h-96 bg-accent-alt/5 rounded-full blur-3xl"
+        ></div>
+
+        <div
+          class="max-w-7xl mx-auto relative z-10 flex flex-col-reverse md:flex-row gap-8 items-center"
         >
-          <h2 class="text-5xl font-bold">About Me</h2>
-          <div class="accent-line"></div>
-        </div>
-
-        <div class="grid md:grid-cols-2 gap-16">
           <div
-            class="about-text"
-            style="opacity: 0; transform: translateX(-50px)"
+            class="hero-photo w-64 md:w-96 rounded-md"
+            style="opacity: 0; transform: scale(0.8)"
           >
-            <p class="text-lg text-text leading-relaxed mb-6">
-              I'm a passionate Software Engineer with expertise in building
-              modern web applications and cloud infrastructure. I graduated from
-              <span class="text-accent"
-                >Mawlana Bhashani Science and Technology University</span
-              >
-              with a B.Sc. in Information and Communication Technology.
-            </p>
-            <p class="text-lg text-text leading-relaxed mb-6">
-              Currently working as a Software Engineer at
-              <span class="text-accent">Genesys Softwares LLC</span>, I
-              specialize in full-stack development and DevOps practices. My
-              expertise spans from building scalable web applications to
-              deploying them on AWS with CI/CD pipelines.
-            </p>
-            <p class="text-lg text-text leading-relaxed">
-              I'm a quick learner and effective communicator with a passion for
-              competitive programming and learning cutting-edge technologies.
-              I've worked on diverse projects including
-              <span class="text-accent">Craft Music</span>, an online music
-              learning platform with advanced features.
-            </p>
+            <img
+              src="image/me.jpeg"
+              class="w-full h-full object-cover rounded-md"
+              alt="Md Emran Ali"
+            />
           </div>
+          <div class="hero-content">
+            <p
+              class="text-accent mb-4 tracking-wider"
+              style="opacity: 0; transform: translateY(20px)"
+            >
+              Hello, I'm
+            </p>
+            <h1
+              class="text-4xl md:text-7xl font-black mb-6 text-text-white"
+              style="opacity: 0; transform: translateY(20px)"
+            >
+              Md Emran Ali
+            </h1>
+            <h2
+              class="text-2xl md:text-4xl mb-8 gradient-text font-bold"
+              style="opacity: 0; transform: translateY(20px)"
+            >
+              Software Engineer
+            </h2>
+            <p
+              class="text-lg md:text-xl text-text max-w-2xl mb-12 leading-relaxed"
+              style="opacity: 0; transform: translateY(20px)"
+            >
+              Building scalable web applications and cloud infrastructure with
+              modern technologies. Specialized in full-stack development with
+              React, Next.js, Laravel, and AWS DevOps.
+            </p>
+            <div
+              class="flex gap-6 flex-wrap"
+              style="opacity: 0; transform: translateY(20px)"
+            >
+              <a
+                href="#contact"
+                class="btn-primary px-8 py-4 rounded-lg font-semibold relative z-0"
+              >
+                Get In Touch
+              </a>
+              <a
+                href="#projects"
+                class="px-8 py-4 rounded-lg font-semibold border-2 border-text-light/30 text-text-light hover:border-accent hover:text-accent transition"
+              >
+                View Projects
+              </a>
+            </div>
+            <div
+              class="flex gap-6 mt-12"
+              style="opacity: 0; transform: translateY(20px)"
+            >
+              <a
+                href="https://github.com/Emran-Ali"
+                target="_blank"
+                class="text-text-light hover:text-accent transition transform hover:scale-110"
+              >
+                <i class="fab fa-github text-3xl"></i>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/itsemran/"
+                target="_blank"
+                class="text-text-light hover:text-accent transition transform hover:scale-110"
+              >
+                <i class="fab fa-linkedin-in text-3xl"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
 
-          <div
-            class="about-details"
-            style="opacity: 0; transform: translateX(50px)"
-          >
-            <div class="bg-secondary p-8 rounded-lg border border-accent/20">
-              <h3 class="text-2xl font-bold mb-6 text-accent">Quick Facts</h3>
-              <div class="space-y-4">
-                <div class="flex items-start gap-3">
-                  <i class="fas fa-map-marker-alt text-accent mt-1"></i>
-                  <div>
-                    <p class="text-text-light font-semibold">Location</p>
-                    <p class="text-text">Dhaka, Bangladesh</p>
-                  </div>
+      <!-- Content Sections - Fixed background layer that gets revealed -->
+      <div class="content-sections">
+        <div class="content-wrapper">
+          <!-- About Section -->
+          <section id="about" class="py-32 px-6 relative">
+            <div class="max-w-7xl mx-auto">
+              <div
+                class="flex items-center gap-4 mb-16 about-header"
+                style="opacity: 0"
+              >
+                <h2 class="text-5xl font-bold">About Me</h2>
+                <div class="accent-line"></div>
+              </div>
+
+              <div class="grid md:grid-cols-2 gap-16">
+                <div
+                  class="about-text"
+                  style="opacity: 0; transform: translateX(-50px)"
+                >
+                  <p class="text-lg text-text leading-relaxed mb-6">
+                    I'm a passionate Software Engineer with expertise in
+                    building modern web applications and cloud infrastructure. I
+                    graduated from
+                    <span class="text-accent"
+                      >Mawlana Bhashani Science and Technology University</span
+                    >
+                    with a B.Sc. in Information and Communication Technology.
+                  </p>
+                  <p class="text-lg text-text leading-relaxed mb-6">
+                    Currently working as a Software Engineer at
+                    <span class="text-accent">Genesys Softwares LLC</span>, I
+                    specialize in full-stack development and DevOps practices.
+                    My expertise spans from building scalable web applications
+                    to deploying them on AWS with CI/CD pipelines.
+                  </p>
+                  <p class="text-lg text-text leading-relaxed">
+                    I'm a quick learner and effective communicator with a
+                    passion for competitive programming and learning
+                    cutting-edge technologies. I've worked on diverse projects
+                    including
+                    <span class="text-accent">Craft Music</span>, an online
+                    music learning platform with advanced features.
+                  </p>
                 </div>
-                <div class="flex items-start gap-3">
-                  <i class="fas fa-graduation-cap text-accent mt-1"></i>
-                  <div>
-                    <p class="text-text-light font-semibold">Education</p>
-                    <p class="text-text">B.Sc. in ICT (2019-2024)</p>
-                  </div>
-                </div>
-                <div class="flex items-start gap-3">
-                  <i class="fas fa-briefcase text-accent mt-1"></i>
-                  <div>
-                    <p class="text-text-light font-semibold">Current Role</p>
-                    <p class="text-text">Software Engineer</p>
-                  </div>
-                </div>
-                <div class="flex items-start gap-3">
-                  <i class="fas fa-code text-accent mt-1"></i>
-                  <div>
-                    <p class="text-text-light font-semibold">Specialization</p>
-                    <p class="text-text">Full Stack & DevOps</p>
+
+                <div
+                  class="about-details"
+                  style="opacity: 0; transform: translateX(50px)"
+                >
+                  <div
+                    class="bg-secondary p-8 rounded-lg border border-accent/20"
+                  >
+                    <h3 class="text-2xl font-bold mb-6 text-accent">
+                      Quick Facts
+                    </h3>
+                    <div class="space-y-4">
+                      <div class="flex items-start gap-3">
+                        <i class="fas fa-map-marker-alt text-accent mt-1"></i>
+                        <div>
+                          <p class="text-text-light font-semibold">Location</p>
+                          <p class="text-text">Dhaka, Bangladesh</p>
+                        </div>
+                      </div>
+                      <div class="flex items-start gap-3">
+                        <i class="fas fa-graduation-cap text-accent mt-1"></i>
+                        <div>
+                          <p class="text-text-light font-semibold">Education</p>
+                          <p class="text-text">B.Sc. in ICT (2019-2024)</p>
+                        </div>
+                      </div>
+                      <div class="flex items-start gap-3">
+                        <i class="fas fa-briefcase text-accent mt-1"></i>
+                        <div>
+                          <p class="text-text-light font-semibold">
+                            Current Role
+                          </p>
+                          <p class="text-text">Software Engineer</p>
+                        </div>
+                      </div>
+                      <div class="flex items-start gap-3">
+                        <i class="fas fa-code text-accent mt-1"></i>
+                        <div>
+                          <p class="text-text-light font-semibold">
+                            Specialization
+                          </p>
+                          <p class="text-text">Full Stack & DevOps</p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
+          </section>
 
-    <!-- Experience Section -->
-    <section id="experience" class="py-32 px-6 relative">
-      <div class="max-w-7xl mx-auto">
-        <div
-          class="flex items-center gap-4 mb-16 exp-header"
-          style="opacity: 0"
-        >
-          <h2 class="text-5xl font-bold">Experience</h2>
-          <div class="accent-line"></div>
-        </div>
-
-        <div class="space-y-12">
-          <!-- Genesys Softwares -->
-          <div
-            class="relative pl-12 exp-item"
-            style="opacity: 0; transform: translateY(30px)"
-          >
-            <div class="timeline-dot absolute left-0 top-2"></div>
-            <div class="timeline-line"></div>
-
-            <div
-              class="bg-secondary p-8 rounded-lg border border-accent/20 hover:border-accent/40 transition-all"
-            >
+          <!-- Experience Section -->
+          <section id="experience" class="py-32 px-6 relative bg-secondary/20">
+            <div class="max-w-7xl mx-auto">
               <div
-                class="flex flex-wrap justify-between items-start gap-4 mb-4"
+                class="flex items-center gap-4 mb-16 exp-header"
+                style="opacity: 0"
               >
-                <div>
-                  <h3 class="text-2xl font-bold text-text-white mb-2">
-                    Software Engineer
-                  </h3>
-                  <p class="text-accent font-semibold">Genesys Softwares LLC</p>
-                </div>
-                <span
-                  class="text-text bg-primary px-4 py-2 rounded-full text-sm"
-                  >Feb 2025 - Present</span
+                <h2 class="text-5xl font-bold">Experience</h2>
+                <div class="accent-line"></div>
+              </div>
+
+              <div class="space-y-12">
+                <!-- Genesys Softwares -->
+                <div
+                  class="relative pl-12 exp-item"
+                  style="opacity: 0; transform: translateY(30px)"
                 >
+                  <div class="timeline-dot absolute left-0 top-2"></div>
+                  <div class="timeline-line"></div>
+
+                  <div
+                    class="bg-secondary p-8 rounded-lg border border-accent/20 hover:border-accent/40 transition-all"
+                  >
+                    <div
+                      class="flex flex-wrap justify-between items-start gap-4 mb-4"
+                    >
+                      <div>
+                        <h3 class="text-2xl font-bold text-text-white mb-2">
+                          Software Engineer
+                        </h3>
+                        <p class="text-accent font-semibold">
+                          Genesys Softwares LLC
+                        </p>
+                      </div>
+                      <span
+                        class="text-text bg-primary px-4 py-2 rounded-full text-sm"
+                        >Feb 2025 - Present</span
+                      >
+                    </div>
+
+                    <p class="text-text mb-6 leading-relaxed">
+                      Contributing to innovative projects with a focus on
+                      full-stack development and cloud infrastructure. Working
+                      with cutting-edge technologies to deliver scalable
+                      solutions.
+                    </p>
+
+                    <div class="space-y-3">
+                      <div class="flex gap-3">
+                        <i class="fas fa-code text-accent mt-1"></i>
+                        <p class="text-text">
+                          Develop and maintain web applications using modern
+                          JavaScript frameworks
+                        </p>
+                      </div>
+                      <div class="flex gap-3">
+                        <i class="fas fa-cloud text-accent mt-1"></i>
+                        <p class="text-text">
+                          Deploy projects with CI/CD pipelines using GitHub
+                          Actions
+                        </p>
+                      </div>
+                      <div class="flex gap-3">
+                        <i class="fas fa-server text-accent mt-1"></i>
+                        <p class="text-text">
+                          Configure and manage AWS services: EC2, CloudFront,
+                          S3, RDS, Route 53
+                        </p>
+                      </div>
+                      <div class="flex gap-3">
+                        <i class="fas fa-docker text-accent mt-1"></i>
+                        <p class="text-text">
+                          Containerize applications using Docker for consistent
+                          deployment
+                        </p>
+                      </div>
+                      <div class="flex gap-3">
+                        <i class="fas fa-shield-alt text-accent mt-1"></i>
+                        <p class="text-text">
+                          Set up IAM users, roles, and security policies for AWS
+                          infrastructure
+                        </p>
+                      </div>
+                      <div class="flex gap-3">
+                        <i class="fas fa-video text-accent mt-1"></i>
+                        <p class="text-text">
+                          Configure AWS MediaConvert for video processing and
+                          transcoding
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="mt-6 pt-6 border-t border-accent/20">
+                      <h4 class="text-text-light font-semibold mb-4">
+                        Key Project:
+                      </h4>
+
+                      <div>
+                        <div class="flex items-center gap-3 mb-2 flex-wrap">
+                          <h5 class="text-accent font-semibold text-xl">
+                            Craft Music Platform
+                          </h5>
+                          <a
+                            href="https://craft-music.dev"
+                            target="_blank"
+                            class="text-text-light hover:text-accent transition text-sm"
+                          >
+                            <i class="fas fa-external-link-alt"></i>
+                            craft-music.dev
+                          </a>
+                          <a
+                            href="https://admin.craft-music.dev"
+                            target="_blank"
+                            class="text-text-light hover:text-accent transition text-sm"
+                          >
+                            <i class="fas fa-external-link-alt"></i>
+                            admin.craft-music.dev
+                          </a>
+                        </div>
+                        <p class="text-text mb-3">
+                          Comprehensive online music learning platform with
+                          advanced features including video streaming, course
+                          management, real-time interactions, and payment
+                          integration. Deployed on AWS with full CI/CD
+                          automation.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                          <span
+                            class="skill-tag px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
+                            >NextJs</span
+                          >
+                          <span
+                            class="skill-tag px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
+                            >Laravel</span
+                          >
+                          <span
+                            class="skill-tag px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
+                            >AWS</span
+                          >
+                          <span
+                            class="skill-tag px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
+                            >CI/CD</span
+                          >
+                          <span
+                            class="skill-tag px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
+                            >Docker</span
+                          >
+                          <span
+                            class="skill-tag px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
+                            >MediaConvert</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- SoftBD Ltd -->
+                <div
+                  class="relative pl-12 exp-item"
+                  style="opacity: 0; transform: translateY(30px)"
+                >
+                  <div class="timeline-dot absolute left-0 top-2"></div>
+                  <div class="timeline-line"></div>
+
+                  <div
+                    class="bg-secondary p-8 rounded-lg border border-accent/20 hover:border-accent/40 transition-all"
+                  >
+                    <div
+                      class="flex flex-wrap justify-between items-start gap-4 mb-4"
+                    >
+                      <div>
+                        <h3 class="text-2xl font-bold text-text-white mb-2">
+                          Junior Software Engineer
+                        </h3>
+                        <p class="text-accent font-semibold">SoftBD Ltd.</p>
+                      </div>
+                      <span
+                        class="text-text bg-primary px-4 py-2 rounded-full text-sm"
+                        >Feb 2024 - Feb 2025</span
+                      >
+                    </div>
+
+                    <div class="space-y-3 mt-6">
+                      <div class="flex gap-3">
+                        <i class="fas fa-laptop-code text-accent mt-1"></i>
+                        <p class="text-text">
+                          Designed and developed user interfaces using NextJs,
+                          ReactJs, and Blade Template
+                        </p>
+                      </div>
+                      <div class="flex gap-3">
+                        <i class="fas fa-database text-accent mt-1"></i>
+                        <p class="text-text">
+                          Designed, developed, and maintained backend systems
+                          using Laravel framework
+                        </p>
+                      </div>
+                      <div class="flex gap-3">
+                        <i class="fas fa-plug text-accent mt-1"></i>
+                        <p class="text-text">
+                          Developed and optimized RESTful APIs to support
+                          frontend operations
+                        </p>
+                      </div>
+                      <div class="flex gap-3">
+                        <i class="fas fa-table text-accent mt-1"></i>
+                        <p class="text-text">
+                          Designed and maintained relational database schemas
+                          using MySQL and PostgreSQL
+                        </p>
+                      </div>
+                      <div class="flex gap-3">
+                        <i class="fas fa-users text-accent mt-1"></i>
+                        <p class="text-text">
+                          Collaborated with cross-functional teams for timely
+                          delivery of software projects
+                        </p>
+                      </div>
+                      <div class="flex gap-3">
+                        <i class="fas fa-bug text-accent mt-1"></i>
+                        <p class="text-text">
+                          Participated in code reviews and debugging to enhance
+                          software reliability
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="mt-6 pt-6 border-t border-accent/20">
+                      <h4 class="text-text-light font-semibold mb-4">
+                        Key Projects:
+                      </h4>
+
+                      <div class="space-y-4">
+                        <div>
+                          <h5 class="text-accent font-semibold mb-2">
+                            Housing Society Management System
+                          </h5>
+                          <p class="text-text mb-3">
+                            Full-stack web application for housing society
+                            management with comprehensive features
+                          </p>
+                          <div class="flex flex-wrap gap-2">
+                            <span
+                              class="skill-tag px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
+                              >Laravel</span
+                            >
+                            <span
+                              class="skill-tag px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
+                              >NextJs</span
+                            >
+                            <span
+                              class="skill-tag px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
+                              >Material UI</span
+                            >
+                          </div>
+                        </div>
+
+                        <div>
+                          <h5 class="text-accent font-semibold mb-2">
+                            Integrated Development Business Platform
+                          </h5>
+                          <p class="text-text mb-3">
+                            Enterprise business platform with comprehensive
+                            features and analytics
+                          </p>
+                          <div class="flex flex-wrap gap-2">
+                            <span
+                              class="skill-tag px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
+                              >Laravel</span
+                            >
+                            <span
+                              class="skill-tag px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
+                              >Blade</span
+                            >
+                            <span
+                              class="skill-tag px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
+                              >Bootstrap</span
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Projects Section -->
+          <section id="projects" class="py-32 px-6 relative">
+            <div class="max-w-7xl mx-auto">
+              <div
+                class="flex items-center gap-4 mb-16 projects-header"
+                style="opacity: 0"
+              >
+                <h2 class="text-5xl font-bold">Featured Projects</h2>
+                <div class="accent-line"></div>
               </div>
 
-              <p class="text-text mb-6 leading-relaxed">
-                Contributing to innovative projects with a focus on full-stack
-                development and cloud infrastructure. Working with cutting-edge
-                technologies to deliver scalable solutions.
-              </p>
-
-              <div class="space-y-3">
-                <div class="flex gap-3">
-                  <i class="fas fa-code text-accent mt-1"></i>
-                  <p class="text-text">
-                    Develop and maintain web applications using modern
-                    JavaScript frameworks
-                  </p>
-                </div>
-                <div class="flex gap-3">
-                  <i class="fas fa-cloud text-accent mt-1"></i>
-                  <p class="text-text">
-                    Deploy projects with CI/CD pipelines using GitHub Actions
-                  </p>
-                </div>
-                <div class="flex gap-3">
-                  <i class="fas fa-server text-accent mt-1"></i>
-                  <p class="text-text">
-                    Configure and manage AWS services: EC2, CloudFront, S3, RDS,
-                    Route 53
-                  </p>
-                </div>
-                <div class="flex gap-3">
-                  <i class="fas fa-docker text-accent mt-1"></i>
-                  <p class="text-text">
-                    Containerize applications using Docker for consistent
-                    deployment
-                  </p>
-                </div>
-                <div class="flex gap-3">
-                  <i class="fas fa-shield-alt text-accent mt-1"></i>
-                  <p class="text-text">
-                    Set up IAM users, roles, and security policies for AWS
-                    infrastructure
-                  </p>
-                </div>
-                <div class="flex gap-3">
-                  <i class="fas fa-video text-accent mt-1"></i>
-                  <p class="text-text">
-                    Configure AWS MediaConvert for video processing and
-                    transcoding
-                  </p>
-                </div>
-              </div>
-
-              <div class="mt-6 pt-6 border-t border-accent/20">
-                <h4 class="text-text-light font-semibold mb-4">Key Project:</h4>
-
-                <div>
-                  <div class="flex items-center gap-3 mb-2">
-                    <h5 class="text-accent font-semibold text-xl">
-                      Craft Music Platform
-                    </h5>
-                    <a
-                      href="https://craft-music.dev"
-                      target="_blank"
-                      class="text-text-light hover:text-accent transition text-sm"
+              <div class="grid md:grid-cols-2 gap-8">
+                <!-- GitHub User Finder -->
+                <div
+                  class="project-card p-8 rounded-lg project-item"
+                  style="opacity: 0; transform: translateY(30px)"
+                >
+                  <div class="flex justify-between items-start mb-6">
+                    <svg
+                      class="w-12 h-12 text-accent"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
                     >
-                      <i class="fas fa-external-link-alt"></i> craft-music.dev
-                    </a>
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"
+                      ></path>
+                    </svg>
                     <a
-                      href="https://admin.craft-music.dev"
+                      href="https://github.com/Emran-Ali"
                       target="_blank"
-                      class="text-text-light hover:text-accent transition text-sm"
+                      class="text-text-light hover:text-accent transition"
                     >
-                      <i class="fas fa-external-link-alt"></i>
-                      admin.craft-music.dev
+                      <i class="fab fa-github text-2xl"></i>
                     </a>
                   </div>
-                  <p class="text-text mb-3">
-                    Comprehensive online music learning platform with advanced
-                    features including video streaming, course management,
-                    real-time interactions, and payment integration. Deployed on
-                    AWS with full CI/CD automation.
+
+                  <h3 class="text-2xl font-bold mb-4 text-text-white">
+                    GitHub User Finder
+                  </h3>
+                  <p class="text-text mb-6 leading-relaxed">
+                    A dynamic React web application that enables users to search
+                    GitHub profiles by username, providing instant access to
+                    comprehensive user details with an intuitive interface.
                   </p>
-                  <div class="flex flex-wrap gap-2">
+
+                  <div class="flex flex-wrap gap-2 mb-6">
                     <span
                       class="skill-tag px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
-                      >NextJs</span
+                      >ReactJs</span
                     >
+                    <span
+                      class="skill-tag px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
+                      >JavaScript</span
+                    >
+                    <span
+                      class="skill-tag px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
+                      >REST API</span
+                    >
+                  </div>
+                </div>
+
+                <!-- BudgetApp -->
+                <div
+                  class="project-card p-8 rounded-lg project-item"
+                  style="opacity: 0; transform: translateY(30px)"
+                >
+                  <div class="flex justify-between items-start mb-6">
+                    <svg
+                      class="w-12 h-12 text-accent"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      ></path>
+                    </svg>
+                    <a
+                      href="https://github.com/Emran-Ali"
+                      target="_blank"
+                      class="text-text-light hover:text-accent transition"
+                    >
+                      <i class="fab fa-github text-2xl"></i>
+                    </a>
+                  </div>
+
+                  <h3 class="text-2xl font-bold mb-4 text-text-white">
+                    BudgetApp
+                  </h3>
+                  <p class="text-text mb-6 leading-relaxed">
+                    A comprehensive budget management system with robust backend
+                    and sleek frontend design. Features include user
+                    authentication, expense tracking, and responsive design.
+                  </p>
+
+                  <div class="flex flex-wrap gap-2 mb-6">
                     <span
                       class="skill-tag px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
                       >Laravel</span
                     >
                     <span
                       class="skill-tag px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
-                      >AWS</span
+                      >Blade</span
                     >
                     <span
                       class="skill-tag px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
-                      >CI/CD</span
-                    >
-                    <span
-                      class="skill-tag px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
-                      >Docker</span
-                    >
-                    <span
-                      class="skill-tag px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
-                      >MediaConvert</span
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- SoftBD Ltd -->
-          <div
-            class="relative pl-12 exp-item"
-            style="opacity: 0; transform: translateY(30px)"
-          >
-            <div class="timeline-dot absolute left-0 top-2"></div>
-            <div class="timeline-line"></div>
-
-            <div
-              class="bg-secondary p-8 rounded-lg border border-accent/20 hover:border-accent/40 transition-all"
-            >
-              <div
-                class="flex flex-wrap justify-between items-start gap-4 mb-4"
-              >
-                <div>
-                  <h3 class="text-2xl font-bold text-text-white mb-2">
-                    Junior Software Engineer
-                  </h3>
-                  <p class="text-accent font-semibold">SoftBD Ltd.</p>
-                </div>
-                <span
-                  class="text-text bg-primary px-4 py-2 rounded-full text-sm"
-                  >Feb 2024 - Feb 2025</span
-                >
-              </div>
-
-              <div class="space-y-3 mt-6">
-                <div class="flex gap-3">
-                  <i class="fas fa-laptop-code text-accent mt-1"></i>
-                  <p class="text-text">
-                    Designed and developed user interfaces using NextJs,
-                    ReactJs, and Blade Template
-                  </p>
-                </div>
-                <div class="flex gap-3">
-                  <i class="fas fa-database text-accent mt-1"></i>
-                  <p class="text-text">
-                    Designed, developed, and maintained backend systems using
-                    Laravel framework
-                  </p>
-                </div>
-                <div class="flex gap-3">
-                  <i class="fas fa-plug text-accent mt-1"></i>
-                  <p class="text-text">
-                    Developed and optimized RESTful APIs to support frontend
-                    operations
-                  </p>
-                </div>
-                <div class="flex gap-3">
-                  <i class="fas fa-table text-accent mt-1"></i>
-                  <p class="text-text">
-                    Designed and maintained relational database schemas using
-                    MySQL and PostgreSQL
-                  </p>
-                </div>
-                <div class="flex gap-3">
-                  <i class="fas fa-users text-accent mt-1"></i>
-                  <p class="text-text">
-                    Collaborated with cross-functional teams for timely delivery
-                    of software projects
-                  </p>
-                </div>
-                <div class="flex gap-3">
-                  <i class="fas fa-bug text-accent mt-1"></i>
-                  <p class="text-text">
-                    Participated in code reviews and debugging to enhance
-                    software reliability
-                  </p>
-                </div>
-              </div>
-
-              <div class="mt-6 pt-6 border-t border-accent/20">
-                <h4 class="text-text-light font-semibold mb-4">
-                  Key Projects:
-                </h4>
-
-                <div class="space-y-4">
-                  <div>
-                    <h5 class="text-accent font-semibold mb-2">
-                      Housing Society Management System
-                    </h5>
-                    <p class="text-text mb-3">
-                      Full-stack web application for housing society management
-                      with comprehensive features
-                    </p>
-                    <div class="flex flex-wrap gap-2">
-                      <span
-                        class="skill-tag px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
-                        >Laravel</span
-                      >
-                      <span
-                        class="skill-tag px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
-                        >NextJs</span
-                      >
-                      <span
-                        class="skill-tag px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
-                        >Material UI</span
-                      >
-                    </div>
-                  </div>
-
-                  <div>
-                    <h5 class="text-accent font-semibold mb-2">
-                      Integrated Development Business Platform
-                    </h5>
-                    <p class="text-text mb-3">
-                      Enterprise business platform with comprehensive features
-                      and analytics
-                    </p>
-                    <div class="flex flex-wrap gap-2">
-                      <span
-                        class="skill-tag px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
-                        >Laravel</span
-                      >
-                      <span
-                        class="skill-tag px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
-                        >Blade</span
-                      >
-                      <span
-                        class="skill-tag px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
-                        >Bootstrap</span
-                      >
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="py-32 px-6 relative">
-      <div class="max-w-7xl mx-auto">
-        <div
-          class="flex items-center gap-4 mb-16 projects-header"
-          style="opacity: 0"
-        >
-          <h2 class="text-5xl font-bold">Featured Projects</h2>
-          <div class="accent-line"></div>
-        </div>
-
-        <div class="grid md:grid-cols-2 gap-8">
-          <!-- GitHub User Finder -->
-          <div
-            class="project-card p-8 rounded-lg project-item"
-            style="opacity: 0; transform: translateY(30px)"
-          >
-            <div class="flex justify-between items-start mb-6">
-              <svg
-                class="w-12 h-12 text-accent"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"
-                ></path>
-              </svg>
-              <a
-                href="https://github.com/Emran-Ali"
-                target="_blank"
-                class="text-text-light hover:text-accent transition"
-              >
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path
-                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
-                  />
-                </svg>
-              </a>
-            </div>
-
-            <h3 class="text-2xl font-bold mb-4 text-text-white">
-              GitHub User Finder
-            </h3>
-            <p class="text-text mb-6 leading-relaxed">
-              A dynamic React web application that enables users to search
-              GitHub profiles by username, providing instant access to
-              comprehensive user details with an intuitive interface.
-            </p>
-
-            <div class="flex flex-wrap gap-2 mb-6">
-              <span
-                class="skill-tag px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
-                >ReactJs</span
-              >
-              <span
-                class="skill-tag px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
-                >JavaScript</span
-              >
-              <span
-                class="skill-tag px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
-                >REST API</span
-              >
-            </div>
-          </div>
-
-          <!-- BudgetApp -->
-          <div
-            class="project-card p-8 rounded-lg project-item"
-            style="opacity: 0; transform: translateY(30px)"
-          >
-            <div class="flex justify-between items-start mb-6">
-              <svg
-                class="w-12 h-12 text-accent"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                ></path>
-              </svg>
-              <a
-                href="https://github.com/Emran-Ali"
-                target="_blank"
-                class="text-text-light hover:text-accent transition"
-              >
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path
-                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
-                  />
-                </svg>
-              </a>
-            </div>
-
-            <h3 class="text-2xl font-bold mb-4 text-text-white">BudgetApp</h3>
-            <p class="text-text mb-6 leading-relaxed">
-              A comprehensive budget management system with robust backend and
-              sleek frontend design. Features include user authentication,
-              expense tracking, and responsive design.
-            </p>
-
-            <div class="flex flex-wrap gap-2 mb-6">
-              <span
-                class="skill-tag px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
-                >Laravel</span
-              >
-              <span
-                class="skill-tag px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
-                >Blade</span
-              >
-              <span
-                class="skill-tag px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
-                >Tailwind CSS</span
-              >
-              <span
-                class="skill-tag px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
-                >MySQL</span
-              >
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="py-32 px-6 relative">
-      <div class="max-w-7xl mx-auto">
-        <div
-          class="flex items-center gap-4 mb-16 skills-header"
-          style="opacity: 0"
-        >
-          <h2 class="text-5xl font-bold">Skills & Technologies</h2>
-          <div class="accent-line"></div>
-        </div>
-
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div
-            class="skill-category"
-            style="opacity: 0; transform: translateY(30px)"
-          >
-            <h3
-              class="text-2xl font-bold mb-6 text-accent flex items-center gap-2"
-            >
-              <i class="fas fa-code"></i> Languages
-            </h3>
-            <div class="space-y-3">
-              <div
-                class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
-              >
-                JavaScript
-              </div>
-              <div
-                class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
-              >
-                PHP
-              </div>
-              <div
-                class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
-              >
-                SQL
-              </div>
-              <div
-                class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
-              >
-                C++
-              </div>
-              <div
-                class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
-              >
-                Java
-              </div>
-              <div
-                class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
-              >
-                HTML/CSS
-              </div>
-            </div>
-          </div>
-
-          <div
-            class="skill-category"
-            style="opacity: 0; transform: translateY(30px)"
-          >
-            <h3
-              class="text-2xl font-bold mb-6 text-accent flex items-center gap-2"
-            >
-              <i class="fas fa-layer-group"></i> Frameworks
-            </h3>
-            <div class="space-y-3">
-              <div
-                class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
-              >
-                React
-              </div>
-              <div
-                class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
-              >
-                Next.js
-              </div>
-              <div
-                class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
-              >
-                Laravel
-              </div>
-              <div
-                class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
-              >
-                Tailwind CSS
-              </div>
-              <div
-                class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
-              >
-                Bootstrap
-              </div>
-              <div
-                class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
-              >
-                Material UI
-              </div>
-              <div
-                class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
-              >
-                SWR
-              </div>
-            </div>
-          </div>
-
-          <div
-            class="skill-category"
-            style="opacity: 0; transform: translateY(30px)"
-          >
-            <h3
-              class="text-2xl font-bold mb-6 text-accent flex items-center gap-2"
-            >
-              <i class="fas fa-cloud"></i> DevOps & AWS
-            </h3>
-            <div class="space-y-3">
-              <div
-                class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
-              >
-                <i class="fab fa-docker"></i> Docker
-              </div>
-              <div
-                class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
-              >
-                <i class="fab fa-github"></i> GitHub Actions
-              </div>
-              <div
-                class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
-              >
-                <i class="fab fa-aws"></i> EC2
-              </div>
-              <div
-                class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
-              >
-                <i class="fab fa-aws"></i> CloudFront
-              </div>
-              <div
-                class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
-              >
-                <i class="fab fa-aws"></i> S3
-              </div>
-              <div
-                class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
-              >
-                <i class="fab fa-aws"></i> RDS
-              </div>
-              <div
-                class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
-              >
-                <i class="fab fa-aws"></i> Route 53
-              </div>
-              <div
-                class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
-              >
-                <i class="fab fa-aws"></i> IAM
-              </div>
-              <div
-                class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
-              >
-                <i class="fab fa-aws"></i> MediaConvert
-              </div>
-            </div>
-          </div>
-
-          <div
-            class="skill-category"
-            style="opacity: 0; transform: translateY(30px)"
-          >
-            <h3
-              class="text-2xl font-bold mb-6 text-accent flex items-center gap-2"
-            >
-              <i class="fas fa-tools"></i> Tools & Database
-            </h3>
-            <div class="space-y-3">
-              <div
-                class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
-              >
-                <i class="fab fa-git-alt"></i> Git
-              </div>
-              <div
-                class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
-              >
-                <i class="fab fa-github"></i> GitHub
-              </div>
-              <div
-                class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
-              >
-                <i class="fab fa-gitlab"></i> GitLab
-              </div>
-              <div
-                class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
-              >
-                <i class="fab fa-linux"></i> Linux
-              </div>
-              <div
-                class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
-              >
-                <i class="fas fa-database"></i> PostgreSQL
-              </div>
-              <div
-                class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
-              >
-                <i class="fas fa-database"></i> MySQL
-              </div>
-              <div
-                class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
-              >
-                CI/CD
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Custom Solutions Section -->
-    <section id="solutions" class="py-32 px-6 relative">
-      <div class="max-w-7xl mx-auto">
-        <div
-          class="flex items-center gap-4 mb-16 solutions-header"
-          style="opacity: 0"
-        >
-          <h2 class="text-5xl font-bold">Custom Solutions</h2>
-          <div class="accent-line"></div>
-        </div>
-
-        <div class="grid md:grid-cols-2 gap-12">
-          <div
-            class="solution-item"
-            style="opacity: 0; transform: translateX(-50px)"
-          >
-            <h3 class="text-3xl font-bold mb-6 gradient-text">What I Offer</h3>
-            <p class="text-lg text-text leading-relaxed mb-8">
-              I specialize in creating tailored web solutions with full DevOps
-              integration. From concept to cloud deployment, I deliver scalable,
-              efficient, and automated applications that meet your unique
-              requirements.
-            </p>
-
-            <div class="space-y-6">
-              <div class="flex gap-4">
-                <div class="text-accent text-2xl">
-                  <i class="fas fa-laptop-code"></i>
-                </div>
-                <div>
-                  <h4 class="text-xl font-bold text-text-white mb-2">
-                    Full Stack Development
-                  </h4>
-                  <p class="text-text">
-                    End-to-end application development with React, Next.js, and
-                    Laravel
-                  </p>
-                </div>
-              </div>
-
-              <div class="flex gap-4">
-                <div class="text-accent text-2xl">
-                  <i class="fas fa-cloud-upload-alt"></i>
-                </div>
-                <div>
-                  <h4 class="text-xl font-bold text-text-white mb-2">
-                    Cloud Deployment & CI/CD
-                  </h4>
-                  <p class="text-text">
-                    Automated deployment pipelines with GitHub Actions and AWS
-                    services
-                  </p>
-                </div>
-              </div>
-
-              <div class="flex gap-4">
-                <div class="text-accent text-2xl">
-                  <i class="fab fa-aws"></i>
-                </div>
-                <div>
-                  <h4 class="text-xl font-bold text-text-white mb-2">
-                    AWS Infrastructure Setup
-                  </h4>
-                  <p class="text-text">
-                    EC2, S3, CloudFront, RDS, Route 53, IAM, and MediaConvert
-                    configuration
-                  </p>
-                </div>
-              </div>
-
-              <div class="flex gap-4">
-                <div class="text-accent text-2xl">
-                  <i class="fab fa-docker"></i>
-                </div>
-                <div>
-                  <h4 class="text-xl font-bold text-text-white mb-2">
-                    Containerization
-                  </h4>
-                  <p class="text-text">
-                    Docker containerization for consistent and portable
-                    deployments
-                  </p>
-                </div>
-              </div>
-
-              <div class="flex gap-4">
-                <div class="text-accent text-2xl">
-                  <i class="fas fa-plug"></i>
-                </div>
-                <div>
-                  <h4 class="text-xl font-bold text-text-white mb-2">
-                    API Development
-                  </h4>
-                  <p class="text-text">
-                    Building robust RESTful APIs with Laravel for seamless
-                    integration
-                  </p>
-                </div>
-              </div>
-
-              <div class="flex gap-4">
-                <div class="text-accent text-2xl">
-                  <i class="fas fa-database"></i>
-                </div>
-                <div>
-                  <h4 class="text-xl font-bold text-text-white mb-2">
-                    Database Architecture
-                  </h4>
-                  <p class="text-text">
-                    Optimized database design with MySQL and PostgreSQL
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div
-            class="solution-item"
-            style="opacity: 0; transform: translateX(50px)"
-          >
-            <div class="bg-secondary p-10 rounded-lg border border-accent/20">
-              <h3 class="text-3xl font-bold mb-8 text-accent">Tech Stack</h3>
-
-              <div class="space-y-8">
-                <div>
-                  <h4
-                    class="text-text-light font-semibold mb-4 flex items-center gap-2"
-                  >
-                    <i class="fas fa-paint-brush text-accent"></i>
-                    Frontend Excellence
-                  </h4>
-                  <div class="flex flex-wrap gap-2">
-                    <span
-                      class="px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
-                      >React</span
-                    >
-                    <span
-                      class="px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
-                      >Next.js</span
-                    >
-                    <span
-                      class="px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
                       >Tailwind CSS</span
                     >
                     <span
-                      class="px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
-                      >Material UI</span
-                    >
-                    <span
-                      class="px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
-                      >SWR</span
-                    >
-                  </div>
-                </div>
-
-                <div>
-                  <h4
-                    class="text-text-light font-semibold mb-4 flex items-center gap-2"
-                  >
-                    <i class="fas fa-server text-accent"></i>
-                    Backend Power
-                  </h4>
-                  <div class="flex flex-wrap gap-2">
-                    <span
-                      class="px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
-                      >Laravel</span
-                    >
-                    <span
-                      class="px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
-                      >PHP</span
-                    >
-                    <span
-                      class="px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
-                      >RESTful APIs</span
-                    >
-                    <span
-                      class="px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
-                      >Node.js</span
-                    >
-                  </div>
-                </div>
-
-                <div>
-                  <h4
-                    class="text-text-light font-semibold mb-4 flex items-center gap-2"
-                  >
-                    <i class="fas fa-database text-accent"></i>
-                    Database Management
-                  </h4>
-                  <div class="flex flex-wrap gap-2">
-                    <span
-                      class="px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
+                      class="skill-tag px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
                       >MySQL</span
                     >
-                    <span
-                      class="px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
-                      >PostgreSQL</span
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Skills Section -->
+          <section id="skills" class="py-32 px-6 relative bg-secondary/20">
+            <div class="max-w-7xl mx-auto">
+              <div
+                class="flex items-center gap-4 mb-16 skills-header"
+                style="opacity: 0"
+              >
+                <h2 class="text-5xl font-bold">Skills & Technologies</h2>
+                <div class="accent-line"></div>
+              </div>
+
+              <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div
+                  class="skill-category"
+                  style="opacity: 0; transform: translateY(30px)"
+                >
+                  <h3
+                    class="text-2xl font-bold mb-6 text-accent flex items-center gap-2"
+                  >
+                    <i class="fas fa-code"></i> Languages
+                  </h3>
+                  <div class="space-y-3">
+                    <div
+                      class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
                     >
-                    <span
-                      class="px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
-                      >RDS</span
+                      JavaScript
+                    </div>
+                    <div
+                      class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
                     >
+                      PHP
+                    </div>
+                    <div
+                      class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
+                    >
+                      SQL
+                    </div>
+                    <div
+                      class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
+                    >
+                      C++
+                    </div>
+                    <div
+                      class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
+                    >
+                      Java
+                    </div>
+                    <div
+                      class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
+                    >
+                      HTML/CSS
+                    </div>
                   </div>
                 </div>
 
-                <div>
-                  <h4
-                    class="text-text-light font-semibold mb-4 flex items-center gap-2"
+                <div
+                  class="skill-category"
+                  style="opacity: 0; transform: translateY(30px)"
+                >
+                  <h3
+                    class="text-2xl font-bold mb-6 text-accent flex items-center gap-2"
                   >
-                    <i class="fab fa-aws text-accent"></i>
-                    DevOps & Cloud
-                  </h4>
-                  <div class="flex flex-wrap gap-2">
-                    <span
-                      class="px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
-                      >Docker</span
+                    <i class="fas fa-layer-group"></i> Frameworks
+                  </h3>
+                  <div class="space-y-3">
+                    <div
+                      class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
                     >
-                    <span
-                      class="px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
-                      >GitHub Actions</span
+                      React
+                    </div>
+                    <div
+                      class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
                     >
-                    <span
-                      class="px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
-                      >AWS EC2</span
+                      Next.js
+                    </div>
+                    <div
+                      class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
                     >
-                    <span
-                      class="px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
-                      >CloudFront</span
+                      Laravel
+                    </div>
+                    <div
+                      class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
                     >
-                    <span
-                      class="px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
-                      >S3</span
+                      Tailwind CSS
+                    </div>
+                    <div
+                      class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
                     >
-                    <span
-                      class="px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
-                      >Route 53</span
+                      Bootstrap
+                    </div>
+                    <div
+                      class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
                     >
-                    <span
-                      class="px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
-                      >IAM</span
+                      Material UI
+                    </div>
+                    <div
+                      class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
                     >
-                    <span
-                      class="px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
-                      >MediaConvert</span
+                      SWR
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="skill-category"
+                  style="opacity: 0; transform: translateY(30px)"
+                >
+                  <h3
+                    class="text-2xl font-bold mb-6 text-accent flex items-center gap-2"
+                  >
+                    <i class="fas fa-cloud"></i> DevOps & AWS
+                  </h3>
+                  <div class="space-y-3">
+                    <div
+                      class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
                     >
+                      <i class="fab fa-docker"></i> Docker
+                    </div>
+                    <div
+                      class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
+                    >
+                      <i class="fab fa-github"></i> GitHub Actions
+                    </div>
+                    <div
+                      class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
+                    >
+                      <i class="fab fa-aws"></i> EC2
+                    </div>
+                    <div
+                      class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
+                    >
+                      <i class="fab fa-aws"></i> CloudFront
+                    </div>
+                    <div
+                      class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
+                    >
+                      <i class="fab fa-aws"></i> S3
+                    </div>
+                    <div
+                      class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
+                    >
+                      <i class="fab fa-aws"></i> RDS
+                    </div>
+                    <div
+                      class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
+                    >
+                      <i class="fab fa-aws"></i> Route 53
+                    </div>
+                    <div
+                      class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
+                    >
+                      <i class="fab fa-aws"></i> IAM
+                    </div>
+                    <div
+                      class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
+                    >
+                      <i class="fab fa-aws"></i> MediaConvert
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="skill-category"
+                  style="opacity: 0; transform: translateY(30px)"
+                >
+                  <h3
+                    class="text-2xl font-bold mb-6 text-accent flex items-center gap-2"
+                  >
+                    <i class="fas fa-tools"></i> Tools & Database
+                  </h3>
+                  <div class="space-y-3">
+                    <div
+                      class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
+                    >
+                      <i class="fab fa-git-alt"></i> Git
+                    </div>
+                    <div
+                      class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
+                    >
+                      <i class="fab fa-github"></i> GitHub
+                    </div>
+                    <div
+                      class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
+                    >
+                      <i class="fab fa-gitlab"></i> GitLab
+                    </div>
+                    <div
+                      class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
+                    >
+                      <i class="fab fa-linux"></i> Linux
+                    </div>
+                    <div
+                      class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
+                    >
+                      <i class="fas fa-database"></i> PostgreSQL
+                    </div>
+                    <div
+                      class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
+                    >
+                      <i class="fas fa-database"></i> MySQL
+                    </div>
+                    <div
+                      class="skill-tag px-4 py-3 bg-secondary rounded-lg text-text-light border border-accent/20 hover:border-accent transition"
+                    >
+                      CI/CD
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Custom Solutions Section -->
+          <section id="solutions" class="py-32 px-6 relative">
+            <div class="max-w-7xl mx-auto">
+              <div
+                class="flex items-center gap-4 mb-16 solutions-header"
+                style="opacity: 0"
+              >
+                <h2 class="text-5xl font-bold">Custom Solutions</h2>
+                <div class="accent-line"></div>
+              </div>
+
+              <div class="grid md:grid-cols-2 gap-12">
+                <div
+                  class="solution-item"
+                  style="opacity: 0; transform: translateX(-50px)"
+                >
+                  <h3 class="text-3xl font-bold mb-6 gradient-text">
+                    What I Offer
+                  </h3>
+                  <p class="text-lg text-text leading-relaxed mb-8">
+                    I specialize in creating tailored web solutions with full
+                    DevOps integration. From concept to cloud deployment, I
+                    deliver scalable, efficient, and automated applications that
+                    meet your unique requirements.
+                  </p>
+
+                  <div class="space-y-6">
+                    <div class="flex gap-4">
+                      <div class="text-accent text-2xl">
+                        <i class="fas fa-laptop-code"></i>
+                      </div>
+                      <div>
+                        <h4 class="text-xl font-bold text-text-white mb-2">
+                          Full Stack Development
+                        </h4>
+                        <p class="text-text">
+                          End-to-end application development with React,
+                          Next.js, and Laravel
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                      <div class="text-accent text-2xl">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                      </div>
+                      <div>
+                        <h4 class="text-xl font-bold text-text-white mb-2">
+                          Cloud Deployment & CI/CD
+                        </h4>
+                        <p class="text-text">
+                          Automated deployment pipelines with GitHub Actions and
+                          AWS services
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                      <div class="text-accent text-2xl">
+                        <i class="fab fa-aws"></i>
+                      </div>
+                      <div>
+                        <h4 class="text-xl font-bold text-text-white mb-2">
+                          AWS Infrastructure Setup
+                        </h4>
+                        <p class="text-text">
+                          EC2, S3, CloudFront, RDS, Route 53, IAM, and
+                          MediaConvert configuration
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                      <div class="text-accent text-2xl">
+                        <i class="fab fa-docker"></i>
+                      </div>
+                      <div>
+                        <h4 class="text-xl font-bold text-text-white mb-2">
+                          Containerization
+                        </h4>
+                        <p class="text-text">
+                          Docker containerization for consistent and portable
+                          deployments
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                      <div class="text-accent text-2xl">
+                        <i class="fas fa-plug"></i>
+                      </div>
+                      <div>
+                        <h4 class="text-xl font-bold text-text-white mb-2">
+                          API Development
+                        </h4>
+                        <p class="text-text">
+                          Building robust RESTful APIs with Laravel for seamless
+                          integration
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                      <div class="text-accent text-2xl">
+                        <i class="fas fa-database"></i>
+                      </div>
+                      <div>
+                        <h4 class="text-xl font-bold text-text-white mb-2">
+                          Database Architecture
+                        </h4>
+                        <p class="text-text">
+                          Optimized database design with MySQL and PostgreSQL
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="solution-item"
+                  style="opacity: 0; transform: translateX(50px)"
+                >
+                  <div
+                    class="bg-secondary p-10 rounded-lg border border-accent/20"
+                  >
+                    <h3 class="text-3xl font-bold mb-8 text-accent">
+                      Tech Stack
+                    </h3>
+
+                    <div class="space-y-8">
+                      <div>
+                        <h4
+                          class="text-text-light font-semibold mb-4 flex items-center gap-2"
+                        >
+                          <i class="fas fa-paint-brush text-accent"></i>
+                          Frontend Excellence
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                          <span
+                            class="px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
+                            >React</span
+                          >
+                          <span
+                            class="px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
+                            >Next.js</span
+                          >
+                          <span
+                            class="px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
+                            >Tailwind CSS</span
+                          >
+                          <span
+                            class="px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
+                            >Material UI</span
+                          >
+                          <span
+                            class="px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
+                            >SWR</span
+                          >
+                        </div>
+                      </div>
+
+                      <div>
+                        <h4
+                          class="text-text-light font-semibold mb-4 flex items-center gap-2"
+                        >
+                          <i class="fas fa-server text-accent"></i>
+                          Backend Power
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                          <span
+                            class="px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
+                            >Laravel</span
+                          >
+                          <span
+                            class="px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
+                            >PHP</span
+                          >
+                          <span
+                            class="px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
+                            >RESTful APIs</span
+                          >
+                          <span
+                            class="px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
+                            >Node.js</span
+                          >
+                        </div>
+                      </div>
+
+                      <div>
+                        <h4
+                          class="text-text-light font-semibold mb-4 flex items-center gap-2"
+                        >
+                          <i class="fas fa-database text-accent"></i>
+                          Database Management
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                          <span
+                            class="px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
+                            >MySQL</span
+                          >
+                          <span
+                            class="px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
+                            >PostgreSQL</span
+                          >
+                          <span
+                            class="px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
+                            >RDS</span
+                          >
+                        </div>
+                      </div>
+
+                      <div>
+                        <h4
+                          class="text-text-light font-semibold mb-4 flex items-center gap-2"
+                        >
+                          <i class="fab fa-aws text-accent"></i>
+                          DevOps & Cloud
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                          <span
+                            class="px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
+                            >Docker</span
+                          >
+                          <span
+                            class="px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
+                            >GitHub Actions</span
+                          >
+                          <span
+                            class="px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
+                            >AWS EC2</span
+                          >
+                          <span
+                            class="px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
+                            >CloudFront</span
+                          >
+                          <span
+                            class="px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
+                            >S3</span
+                          >
+                          <span
+                            class="px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
+                            >Route 53</span
+                          >
+                          <span
+                            class="px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
+                            >IAM</span
+                          >
+                          <span
+                            class="px-3 py-1 bg-primary rounded-full text-sm text-text-light border border-accent/30"
+                            >MediaConvert</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="mt-10 pt-8 border-t border-accent/20">
+                      <p class="text-text text-center">
+                        <i class="fas fa-rocket text-accent mr-2"></i>
+                        Ready to deploy your project to the cloud? Let's build
+                        and ship together!
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div class="mt-10 pt-8 border-t border-accent/20">
-                <p class="text-text text-center">
-                  <i class="fas fa-rocket text-accent mr-2"></i>
-                  Ready to deploy your project to the cloud? Let's build and
-                  ship together!
+              <!-- Achievements -->
+              <div class="mt-20">
+                <h3
+                  class="text-3xl font-bold mb-10 text-text-white achievements-header"
+                  style="opacity: 0"
+                >
+                  🏆 Achievements
+                </h3>
+                <div class="grid md:grid-cols-3 gap-6">
+                  <div
+                    class="bg-secondary p-6 rounded-lg border border-accent/20 achievement-item"
+                    style="opacity: 0; transform: translateY(20px)"
+                  >
+                    <div class="text-accent-alt text-4xl mb-4">🥈</div>
+                    <h4 class="text-xl font-bold text-text-white mb-2">
+                      ICT Programming Fiesta
+                    </h4>
+                    <p class="text-text">Runner Up - Team: Matrix Error</p>
+                  </div>
+
+                  <div
+                    class="bg-secondary p-6 rounded-lg border border-accent/20 achievement-item"
+                    style="opacity: 0; transform: translateY(20px)"
+                  >
+                    <div class="text-accent-alt text-4xl mb-4">🥈</div>
+                    <h4 class="text-xl font-bold text-text-white mb-2">
+                      MBSTU ICT Intra Contest
+                    </h4>
+                    <p class="text-text">1st Runner Up - Team: Matrix Error</p>
+                  </div>
+
+                  <div
+                    class="bg-secondary p-6 rounded-lg border border-accent/20 achievement-item"
+                    style="opacity: 0; transform: translateY(20px)"
+                  >
+                    <div class="text-accent-alt text-4xl mb-4">🏆</div>
+                    <h4 class="text-xl font-bold text-text-white mb-2">
+                      Inter Department Contest
+                    </h4>
+                    <p class="text-text">Champion - MBSTU</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Contact Section -->
+          <section id="contact" class="py-32 px-6 relative bg-secondary/20">
+            <div class="max-w-4xl mx-auto text-center">
+              <div class="contact-header" style="opacity: 0">
+                <h2 class="text-5xl md:text-6xl font-bold mb-8">
+                  Get In Touch
+                </h2>
+                <p
+                  class="text-xl text-text max-w-2xl mx-auto mb-12 leading-relaxed"
+                >
+                  Whether you have a question or just want to say hi, I'll try
+                  my best to get back to you!
                 </p>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <!-- Achievements -->
-      <div class="max-w-7xl mx-auto mt-20">
-        <h3
-          class="text-3xl font-bold mb-10 text-text-white achievements-header"
-          style="opacity: 0"
-        >
-          🏆 Achievements
-        </h3>
-        <div class="grid md:grid-cols-3 gap-6">
-          <div
-            class="bg-secondary p-6 rounded-lg border border-accent/20 achievement-item"
-            style="opacity: 0; transform: translateY(20px)"
-          >
-            <div class="text-accent-alt text-4xl mb-4">🥈</div>
-            <h4 class="text-xl font-bold text-text-white mb-2">
-              ICT Programming Fiesta
-            </h4>
-            <p class="text-text">Runner Up - Team: Matrix Error</p>
-          </div>
-
-          <div
-            class="bg-secondary p-6 rounded-lg border border-accent/20 achievement-item"
-            style="opacity: 0; transform: translateY(20px)"
-          >
-            <div class="text-accent-alt text-4xl mb-4">🥈</div>
-            <h4 class="text-xl font-bold text-text-white mb-2">
-              MBSTU ICT Intra Contest
-            </h4>
-            <p class="text-text">1st Runner Up - Team: Matrix Error</p>
-          </div>
-
-          <div
-            class="bg-secondary p-6 rounded-lg border border-accent/20 achievement-item"
-            style="opacity: 0; transform: translateY(20px)"
-          >
-            <div class="text-accent-alt text-4xl mb-4">🏆</div>
-            <h4 class="text-xl font-bold text-text-white mb-2">
-              Inter Department Contest
-            </h4>
-            <p class="text-text">Champion - MBSTU</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-32 px-6 relative">
-      <div class="max-w-4xl mx-auto text-center">
-        <div class="contact-header" style="opacity: 0">
-          <h2 class="text-5xl md:text-6xl font-bold mb-8">Get In Touch</h2>
-          <p class="text-xl text-text max-w-2xl mx-auto mb-12 leading-relaxed">
-            I'm currently available for freelance projects and full-time
-            opportunities. Whether you have a question or just want to say hi,
-            I'll try my best to get back to you!
-          </p>
-        </div>
-
-        <div
-          class="grid md:grid-cols-2 gap-8 mb-12 contact-info"
-          style="opacity: 0"
-        >
-          <div class="bg-secondary p-8 rounded-lg border border-accent/20">
-            <div class="text-accent text-4xl mb-4">📧</div>
-            <h3 class="text-xl font-bold text-text-white mb-3">Email</h3>
-            <a
-              href="/cdn-cgi/l/email-protection#d9bcb4abb8b7b0adb4bbaaadac99beb4b8b0b5f7bab6b4"
-              class="text-accent hover:text-accent-alt transition"
-            >
-              <span
-                class="__cf_email__"
-                data-cfemail="d1b4bca3b0bfb8a5bcb3a2a5a491b6bcb0b8bdffb2bebc"
-                >[email&#160;protected]</span
+              <div
+                class="grid md:grid-cols-2 gap-8 mb-12 contact-info"
+                style="opacity: 0"
               >
-            </a>
-          </div>
+                <div
+                  class="bg-secondary p-8 rounded-lg border border-accent/20 hover:border-accent/40 transition-all"
+                >
+                  <div class="text-accent text-4xl mb-4">
+                    <i class="fas fa-envelope"></i>
+                  </div>
+                  <h3 class="text-xl font-bold text-text-white mb-3">Email</h3>
+                  <a
+                    href="/cdn-cgi/l/email-protection#7f1a120d1e11160b121d0c0b0a3f18121e1613511c1012"
+                    class="text-accent hover:text-accent-alt transition"
+                  >
+                    <span
+                      class="__cf_email__"
+                      data-cfemail="72171f00131c1b061f1001060732151f131b1e5c111d1f"
+                      >[email&#160;protected]</span
+                    >
+                  </a>
+                </div>
 
-          <div class="bg-secondary p-8 rounded-lg border border-accent/20">
-            <div class="text-accent text-4xl mb-4">📱</div>
-            <h3 class="text-xl font-bold text-text-white mb-3">Phone</h3>
-            <div class="space-y-2">
+                <div
+                  class="bg-secondary p-8 rounded-lg border border-accent/20 hover:border-accent/40 transition-all"
+                >
+                  <div class="text-accent text-4xl mb-4">
+                    <i class="fas fa-phone"></i>
+                  </div>
+                  <h3 class="text-xl font-bold text-text-white mb-3">Phone</h3>
+                  <div class="space-y-2">
+                    <a
+                      href="tel:+8801797753865"
+                      class="block text-accent hover:text-accent-alt transition"
+                    >
+                      +880 1797-753865
+                    </a>
+                    <a
+                      href="tel:+8801648675629"
+                      class="block text-accent hover:text-accent-alt transition"
+                    >
+                      +880 1648-675629
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="flex justify-center gap-6 mb-12 contact-social"
+                style="opacity: 0"
+              >
+                <a
+                  href="https://github.com/Emran-Ali"
+                  target="_blank"
+                  class="w-14 h-14 flex items-center justify-center bg-secondary rounded-full border border-accent/20 hover:border-accent hover:transform hover:scale-110 transition text-text-light hover:text-accent"
+                >
+                  <i class="fab fa-github text-2xl"></i>
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/itsemran/"
+                  target="_blank"
+                  class="w-14 h-14 flex items-center justify-center bg-secondary rounded-full border border-accent/20 hover:border-accent hover:transform hover:scale-110 transition text-text-light hover:text-accent"
+                >
+                  <i class="fab fa-linkedin-in text-2xl"></i>
+                </a>
+              </div>
+
               <a
-                href="tel:+8801797753865"
-                class="block text-accent hover:text-accent-alt transition"
+                href="/cdn-cgi/l/email-protection#d7b2baa5b6b9bea3bab5a4a3a297b0bab6bebbf9b4b8ba"
+                class="btn-primary inline-block px-10 py-5 rounded-lg font-semibold text-lg relative z-0 contact-btn"
+                style="opacity: 0"
               >
-                +880 1797-753865
-              </a>
-              <a
-                href="tel:+8801648675629"
-                class="block text-accent hover:text-accent-alt transition"
-              >
-                +880 1648-675629
+                Say Hello
               </a>
             </div>
-          </div>
+          </section>
+
+          <!-- Footer -->
+          <footer class="py-8 px-6 border-t border-accent/10">
+            <div class="max-w-7xl mx-auto text-center">
+              <p class="text-text">
+                Designed & Built by
+                <span class="text-accent">Md Emran Ali</span>
+              </p>
+              <p class="text-text mt-2 text-sm">© 2024 All rights reserved</p>
+            </div>
+          </footer>
         </div>
-
-        <div
-          class="flex justify-center gap-6 mb-12 contact-social"
-          style="opacity: 0"
-        >
-          <a
-            href="https://github.com/Emran-Ali"
-            target="_blank"
-            class="w-14 h-14 flex items-center justify-center bg-secondary rounded-full border border-accent/20 hover:border-accent hover:transform hover:scale-110 transition text-text-light hover:text-accent"
-          >
-            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-              <path
-                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
-              />
-            </svg>
-          </a>
-          <a
-            href="https://www.linkedin.com/in/itsemran/"
-            target="_blank"
-            class="w-14 h-14 flex items-center justify-center bg-secondary rounded-full border border-accent/20 hover:border-accent hover:transform hover:scale-110 transition text-text-light hover:text-accent"
-          >
-            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-              <path
-                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
-              />
-            </svg>
-          </a>
-        </div>
-
-        <a
-          href="/cdn-cgi/l/email-protection#4b2e26392a25223f2629383f3e0b2c262a222765282426"
-          class="btn-primary inline-block px-10 py-5 rounded-lg font-semibold text-lg relative z-0 contact-btn"
-          style="opacity: 0"
-        >
-          Say Hello
-        </a>
       </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="py-8 px-6 border-t border-accent/10">
-      <div class="max-w-7xl mx-auto text-center">
-        <p class="text-text">
-          Designed & Built by <span class="text-accent">Md Emran Ali</span>
-        </p>
-        <p class="text-text mt-2 text-sm">© 2024 All rights reserved</p>
-      </div>
-    </footer>
-
-    <script
-      data-cfasync="false"
-      src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
-    ></script>
+    </div>
 
     <script>
       gsap.registerPlugin(ScrollTrigger);
-
-      // Custom Cursor
-      const cursor = document.getElementById("cursor");
-      document.addEventListener("mousemove", (e) => {
-        cursor.style.left = e.clientX + "px";
-        cursor.style.top = e.clientY + "px";
-      });
 
       // Navigation Animation
       gsap.to("nav", {
@@ -1516,13 +1551,12 @@
       gsap.to(".hero-photo", {
         opacity: 1,
         scale: 1,
-        x: 0,
         duration: 1.2,
         ease: "power3.out",
         delay: 0.2,
       });
 
-      // Hero Section Animation
+      // Hero Section Content Animation
       const heroElements = document.querySelectorAll(
         ".hero-content p, .hero-content h1, .hero-content h2, .hero-content > p, .hero-content > div",
       );
@@ -1533,6 +1567,45 @@
         stagger: 0.2,
         ease: "power3.out",
         delay: 0.3,
+      });
+
+      // REVEAL ANIMATION - Hero content fades as it scrolls up
+      gsap.to(".hero-content", {
+        yPercent: -30,
+        opacity: 0,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".reveal-container",
+          start: "top top",
+          end: "50% top",
+          scrub: true,
+        },
+      });
+
+      gsap.to(".hero-photo", {
+        yPercent: -30,
+        opacity: 0,
+        scale: 0.8,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".reveal-container",
+          start: "top top",
+          end: "50% top",
+          scrub: true,
+        },
+      });
+
+      // Scale in the About section as Hero scrolls away
+      gsap.from(".content-sections", {
+        scale: 0.9,
+        opacity: 0.5,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".reveal-container",
+          start: "top top",
+          end: "50% top",
+          scrub: true,
+        },
       });
 
       // About Section Animation - with scrub for smooth scroll-linked animation
@@ -1570,7 +1643,7 @@
         ease: "power3.out",
       });
 
-      // Experience Section Animation - Each item has its own trigger for long content
+      // Experience Section Animation
       gsap.to(".exp-header", {
         scrollTrigger: {
           trigger: ".exp-header",
@@ -1581,8 +1654,7 @@
         opacity: 1,
       });
 
-      // Animate each experience item individually for better control with long content
-      document.querySelectorAll(".exp-item").forEach((item, index) => {
+      document.querySelectorAll(".exp-item").forEach((item) => {
         gsap.to(item, {
           scrollTrigger: {
             trigger: item,
@@ -1607,8 +1679,7 @@
         opacity: 1,
       });
 
-      // Animate each project item individually
-      document.querySelectorAll(".project-item").forEach((item, index) => {
+      document.querySelectorAll(".project-item").forEach((item) => {
         gsap.to(item, {
           scrollTrigger: {
             trigger: item,
@@ -1632,8 +1703,7 @@
         opacity: 1,
       });
 
-      // Animate each achievement item individually
-      document.querySelectorAll(".achievement-item").forEach((item, index) => {
+      document.querySelectorAll(".achievement-item").forEach((item) => {
         gsap.to(item, {
           scrollTrigger: {
             trigger: item,
@@ -1658,8 +1728,7 @@
         opacity: 1,
       });
 
-      // Animate each skill category individually
-      document.querySelectorAll(".skill-category").forEach((item, index) => {
+      document.querySelectorAll(".skill-category").forEach((item) => {
         gsap.to(item, {
           scrollTrigger: {
             trigger: item,
@@ -1684,8 +1753,7 @@
         opacity: 1,
       });
 
-      // Animate each solution item individually
-      document.querySelectorAll(".solution-item").forEach((item, index) => {
+      document.querySelectorAll(".solution-item").forEach((item) => {
         gsap.to(item, {
           scrollTrigger: {
             trigger: item,
@@ -1749,9 +1817,12 @@
           e.preventDefault();
           const target = document.querySelector(this.getAttribute("href"));
           if (target) {
-            target.scrollIntoView({
+            // Scroll the content-sections container
+            const container = document.querySelector(".content-sections");
+            const targetOffset = target.offsetTop;
+            container.scrollTo({
+              top: targetOffset,
               behavior: "smooth",
-              block: "start",
             });
           }
         });
