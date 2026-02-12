@@ -86,7 +86,7 @@
 
       /* Hero Section - Fixed overlay that reveals content */
       #hero {
-        position: fixed;
+        position: relative;
         top: 0;
         left: 0;
         width: 100%;
@@ -94,7 +94,6 @@
         z-index: 10;
         background: var(--primary);
         box-shadow: 0px 50px 100px rgba(0, 0, 0, 0.8);
-        transition: opacity 0.5s ease, pointer-events 0.5s ease;
       }
 
       /* Main content wrapper */
@@ -105,9 +104,9 @@
       }
 
       /* Spacer to push content below hero */
-      .hero-spacer {
+      /* .hero-spacer {
         height: 100vh;
-      }
+      } */
 
       /* Ensure all main sections have minimum height and proper spacing */
       #about,
@@ -246,13 +245,19 @@
 
     <!-- Navigation -->
     <nav
-      class="fixed top-0 w-full bg-primary/95 backdrop-blur-sm z-50 border-b border-accent/10"
-      style="opacity: 0; background-color: rgba(10, 25, 47, 0.95)"
+      class="fixed top-0 w-full bg-primary/95 backdrop-blur-sm z-50 border-b"
+      style="
+        opacity: 0;
+        background-color: rgba(10, 25, 47, 0.95);
+        border-color: rgba(100, 255, 218, 0.2);
+      "
       id="main-nav"
     >
       <div class="max-w-7xl mx-auto px-6 py-4">
         <div class="flex justify-between items-center">
-          <a href="#" class="text-2xl font-bold gradient-text" id="nav-logo">EA</a>
+          <a href="#" class="text-2xl font-bold gradient-text" id="nav-logo"
+            >MD Emran Ali</a
+          >
           <div class="hidden md:flex gap-8">
             <a
               href="#about"
@@ -299,7 +304,10 @@
     </nav>
 
     <!-- Hero Section - Fixed overlay that reveals content -->
-    <section id="hero" class="min-h-screen flex items-center justify-center px-6 relative overflow-hidden">
+    <section
+      id="hero"
+      class="min-h-screen flex items-center justify-center px-6 relative overflow-hidden"
+    >
       <div
         class="absolute top-20 right-20 w-96 h-96 bg-accent/5 rounded-full blur-3xl"
         style="background-color: rgba(100, 255, 218, 0.05)"
@@ -312,9 +320,7 @@
       <div
         class="max-w-7xl mx-auto relative z-10 flex flex-col-reverse md:flex-row gap-8 items-center"
       >
-        <div
-          class="hero-photo w-64 md:w-96 rounded-md"
-        >
+        <div class="hero-photo w-64 md:w-96 rounded-md">
           <img
             src="image/me.jpeg"
             class="w-full h-full object-cover rounded-md"
@@ -322,10 +328,7 @@
           />
         </div>
         <div class="hero-content">
-          <p
-            class="text-accent mb-4 tracking-wider"
-            style="color: #64ffda"
-          >
+          <p class="text-accent mb-4 tracking-wider" style="color: #64ffda">
             Hello, I'm
           </p>
           <h1
@@ -334,9 +337,7 @@
           >
             Md Emran Ali
           </h1>
-          <h2
-            class="text-2xl md:text-4xl mb-8 gradient-text font-bold"
-          >
+          <h2 class="text-2xl md:text-4xl mb-8 gradient-text font-bold">
             Software Engineer
           </h2>
           <p
@@ -382,9 +383,12 @@
           </div>
         </div>
       </div>
-      
+
       <!-- Scroll indicator -->
-      <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2" style="color: #8892b0">
+      <div
+        class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        style="color: #8892b0"
+      >
         <span class="text-sm tracking-wider">Scroll to explore</span>
         <i class="fas fa-chevron-down animate-bounce"></i>
       </div>
@@ -392,9 +396,6 @@
 
     <!-- Main Content - Single scroll context -->
     <div id="main-content">
-      <!-- Spacer for hero reveal -->
-      <div class="hero-spacer"></div>
-
       <!-- About Section -->
       <section id="about" class="py-32 px-6 relative">
         <div class="max-w-7xl mx-auto">
@@ -412,9 +413,9 @@
               style="opacity: 0; transform: translateX(-50px)"
             >
               <p class="text-lg leading-relaxed mb-6" style="color: #8892b0">
-                I'm a passionate Software Engineer with expertise in
-                building modern web applications and cloud infrastructure. I
-                graduated from
+                I'm a passionate Software Engineer with expertise in building
+                modern web applications and cloud infrastructure. I graduated
+                from
                 <span style="color: #64ffda"
                   >Mawlana Bhashani Science and Technology University</span
                 >
@@ -423,17 +424,16 @@
               <p class="text-lg leading-relaxed mb-6" style="color: #8892b0">
                 Currently working as a Software Engineer at
                 <span style="color: #64ffda">Genesys Softwares LLC</span>, I
-                specialize in full-stack development and DevOps practices.
-                My expertise spans from building scalable web applications
-                to deploying them on AWS with CI/CD pipelines.
+                specialize in full-stack development and DevOps practices. My
+                expertise spans from building scalable web applications to
+                deploying them on AWS with CI/CD pipelines.
               </p>
               <p class="text-lg leading-relaxed" style="color: #8892b0">
-                I'm a quick learner and effective communicator with a
-                passion for competitive programming and learning
-                cutting-edge technologies. I've worked on diverse projects
-                including
-                <span style="color: #64ffda">Craft Music</span>, an online
-                music learning platform with advanced features.
+                I'm a quick learner and effective communicator with a passion
+                for competitive programming and learning cutting-edge
+                technologies. I've worked on diverse projects including
+                <span style="color: #64ffda">Craft Music</span>, an online music
+                learning platform with advanced features.
               </p>
             </div>
 
@@ -443,23 +443,36 @@
             >
               <div
                 class="p-8 rounded-lg border"
-                style="background-color: #112240; border-color: rgba(100, 255, 218, 0.2)"
+                style="
+                  background-color: #112240;
+                  border-color: rgba(100, 255, 218, 0.2);
+                "
               >
                 <h3 class="text-2xl font-bold mb-6" style="color: #64ffda">
                   Quick Facts
                 </h3>
                 <div class="space-y-4">
                   <div class="flex items-start gap-3">
-                    <i class="fas fa-map-marker-alt mt-1" style="color: #64ffda"></i>
+                    <i
+                      class="fas fa-map-marker-alt mt-1"
+                      style="color: #64ffda"
+                    ></i>
                     <div>
-                      <p class="font-semibold" style="color: #ccd6f6">Location</p>
+                      <p class="font-semibold" style="color: #ccd6f6">
+                        Location
+                      </p>
                       <p style="color: #8892b0">Dhaka, Bangladesh</p>
                     </div>
                   </div>
                   <div class="flex items-start gap-3">
-                    <i class="fas fa-graduation-cap mt-1" style="color: #64ffda"></i>
+                    <i
+                      class="fas fa-graduation-cap mt-1"
+                      style="color: #64ffda"
+                    ></i>
                     <div>
-                      <p class="font-semibold" style="color: #ccd6f6">Education</p>
+                      <p class="font-semibold" style="color: #ccd6f6">
+                        Education
+                      </p>
                       <p style="color: #8892b0">B.Sc. in ICT (2019-2024)</p>
                     </div>
                   </div>
@@ -489,7 +502,11 @@
       </section>
 
       <!-- Experience Section -->
-      <section id="experience" class="py-32 px-6 relative" style="background-color: rgba(17, 34, 64, 0.2)">
+      <section
+        id="experience"
+        class="py-32 px-6 relative"
+        style="background-color: rgba(17, 34, 64, 0.2)"
+      >
         <div class="max-w-7xl mx-auto">
           <div
             class="flex items-center gap-4 mb-16 exp-header"
@@ -510,7 +527,10 @@
 
               <div
                 class="p-8 rounded-lg border hover:border-accent/40 transition-all"
-                style="background-color: #112240; border-color: rgba(100, 255, 218, 0.2)"
+                style="
+                  background-color: #112240;
+                  border-color: rgba(100, 255, 218, 0.2);
+                "
               >
                 <div
                   class="flex flex-wrap justify-between items-start gap-4 mb-4"
@@ -531,10 +551,9 @@
                 </div>
 
                 <p class="mb-6 leading-relaxed" style="color: #8892b0">
-                  Contributing to innovative projects with a focus on
-                  full-stack development and cloud infrastructure. Working
-                  with cutting-edge technologies to deliver scalable
-                  solutions.
+                  Contributing to innovative projects with a focus on full-stack
+                  development and cloud infrastructure. Working with
+                  cutting-edge technologies to deliver scalable solutions.
                 </p>
 
                 <div class="space-y-3">
@@ -548,15 +567,14 @@
                   <div class="flex gap-3">
                     <i class="fas fa-cloud mt-1" style="color: #64ffda"></i>
                     <p style="color: #8892b0">
-                      Deploy projects with CI/CD pipelines using GitHub
-                      Actions
+                      Deploy projects with CI/CD pipelines using GitHub Actions
                     </p>
                   </div>
                   <div class="flex gap-3">
                     <i class="fas fa-server mt-1" style="color: #64ffda"></i>
                     <p style="color: #8892b0">
-                      Configure and manage AWS services: EC2, CloudFront,
-                      S3, RDS, Route 53
+                      Configure and manage AWS services: EC2, CloudFront, S3,
+                      RDS, Route 53
                     </p>
                   </div>
                   <div class="flex gap-3">
@@ -567,7 +585,10 @@
                     </p>
                   </div>
                   <div class="flex gap-3">
-                    <i class="fas fa-shield-alt mt-1" style="color: #64ffda"></i>
+                    <i
+                      class="fas fa-shield-alt mt-1"
+                      style="color: #64ffda"
+                    ></i>
                     <p style="color: #8892b0">
                       Set up IAM users, roles, and security policies for AWS
                       infrastructure
@@ -582,7 +603,10 @@
                   </div>
                 </div>
 
-                <div class="mt-6 pt-6 border-t" style="border-color: rgba(100, 255, 218, 0.2)">
+                <div
+                  class="mt-6 pt-6 border-t"
+                  style="border-color: rgba(100, 255, 218, 0.2)"
+                >
                   <h4 class="font-semibold mb-4" style="color: #ccd6f6">
                     Key Project:
                   </h4>
@@ -612,41 +636,64 @@
                       </a>
                     </div>
                     <p class="mb-3" style="color: #8892b0">
-                      Comprehensive online music learning platform with
-                      advanced features including video streaming, course
-                      management, real-time interactions, and payment
-                      integration. Deployed on AWS with full CI/CD
-                      automation.
+                      Comprehensive online music learning platform with advanced
+                      features including video streaming, course management,
+                      real-time interactions, and payment integration. Deployed
+                      on AWS with full CI/CD automation.
                     </p>
                     <div class="flex flex-wrap gap-2">
                       <span
                         class="skill-tag px-3 py-1 rounded-full text-sm border"
-                        style="background-color: #0a192f; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.3)"
+                        style="
+                          background-color: #0a192f;
+                          color: #ccd6f6;
+                          border-color: rgba(100, 255, 218, 0.3);
+                        "
                         >NextJs</span
                       >
                       <span
                         class="skill-tag px-3 py-1 rounded-full text-sm border"
-                        style="background-color: #0a192f; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.3)"
+                        style="
+                          background-color: #0a192f;
+                          color: #ccd6f6;
+                          border-color: rgba(100, 255, 218, 0.3);
+                        "
                         >Laravel</span
                       >
                       <span
                         class="skill-tag px-3 py-1 rounded-full text-sm border"
-                        style="background-color: #0a192f; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.3)"
+                        style="
+                          background-color: #0a192f;
+                          color: #ccd6f6;
+                          border-color: rgba(100, 255, 218, 0.3);
+                        "
                         >AWS</span
                       >
                       <span
                         class="skill-tag px-3 py-1 rounded-full text-sm border"
-                        style="background-color: #0a192f; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.3)"
+                        style="
+                          background-color: #0a192f;
+                          color: #ccd6f6;
+                          border-color: rgba(100, 255, 218, 0.3);
+                        "
                         >CI/CD</span
                       >
                       <span
                         class="skill-tag px-3 py-1 rounded-full text-sm border"
-                        style="background-color: #0a192f; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.3)"
+                        style="
+                          background-color: #0a192f;
+                          color: #ccd6f6;
+                          border-color: rgba(100, 255, 218, 0.3);
+                        "
                         >Docker</span
                       >
                       <span
                         class="skill-tag px-3 py-1 rounded-full text-sm border"
-                        style="background-color: #0a192f; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.3)"
+                        style="
+                          background-color: #0a192f;
+                          color: #ccd6f6;
+                          border-color: rgba(100, 255, 218, 0.3);
+                        "
                         >MediaConvert</span
                       >
                     </div>
@@ -665,7 +712,10 @@
 
               <div
                 class="p-8 rounded-lg border hover:border-accent/40 transition-all"
-                style="background-color: #112240; border-color: rgba(100, 255, 218, 0.2)"
+                style="
+                  background-color: #112240;
+                  border-color: rgba(100, 255, 218, 0.2);
+                "
               >
                 <div
                   class="flex flex-wrap justify-between items-start gap-4 mb-4"
@@ -674,7 +724,9 @@
                     <h3 class="text-2xl font-bold mb-2" style="color: #e6f1ff">
                       Junior Software Engineer
                     </h3>
-                    <p class="font-semibold" style="color: #64ffda">SoftBD Ltd.</p>
+                    <p class="font-semibold" style="color: #64ffda">
+                      SoftBD Ltd.
+                    </p>
                   </div>
                   <span
                     class="px-4 py-2 rounded-full text-sm"
@@ -685,7 +737,10 @@
 
                 <div class="space-y-3 mt-6">
                   <div class="flex gap-3">
-                    <i class="fas fa-laptop-code mt-1" style="color: #64ffda"></i>
+                    <i
+                      class="fas fa-laptop-code mt-1"
+                      style="color: #64ffda"
+                    ></i>
                     <p style="color: #8892b0">
                       Designed and developed user interfaces using NextJs,
                       ReactJs, and Blade Template
@@ -694,22 +749,22 @@
                   <div class="flex gap-3">
                     <i class="fas fa-database mt-1" style="color: #64ffda"></i>
                     <p style="color: #8892b0">
-                      Designed, developed, and maintained backend systems
-                      using Laravel framework
+                      Designed, developed, and maintained backend systems using
+                      Laravel framework
                     </p>
                   </div>
                   <div class="flex gap-3">
                     <i class="fas fa-plug mt-1" style="color: #64ffda"></i>
                     <p style="color: #8892b0">
-                      Developed and optimized RESTful APIs to support
-                      frontend operations
+                      Developed and optimized RESTful APIs to support frontend
+                      operations
                     </p>
                   </div>
                   <div class="flex gap-3">
                     <i class="fas fa-table mt-1" style="color: #64ffda"></i>
                     <p style="color: #8892b0">
-                      Designed and maintained relational database schemas
-                      using MySQL and PostgreSQL
+                      Designed and maintained relational database schemas using
+                      MySQL and PostgreSQL
                     </p>
                   </div>
                   <div class="flex gap-3">
@@ -728,7 +783,10 @@
                   </div>
                 </div>
 
-                <div class="mt-6 pt-6 border-t" style="border-color: rgba(100, 255, 218, 0.2)">
+                <div
+                  class="mt-6 pt-6 border-t"
+                  style="border-color: rgba(100, 255, 218, 0.2)"
+                >
                   <h4 class="font-semibold mb-4" style="color: #ccd6f6">
                     Key Projects:
                   </h4>
@@ -745,17 +803,29 @@
                       <div class="flex flex-wrap gap-2">
                         <span
                           class="skill-tag px-3 py-1 rounded-full text-sm border"
-                          style="background-color: #0a192f; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.3)"
+                          style="
+                            background-color: #0a192f;
+                            color: #ccd6f6;
+                            border-color: rgba(100, 255, 218, 0.3);
+                          "
                           >Laravel</span
                         >
                         <span
                           class="skill-tag px-3 py-1 rounded-full text-sm border"
-                          style="background-color: #0a192f; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.3)"
+                          style="
+                            background-color: #0a192f;
+                            color: #ccd6f6;
+                            border-color: rgba(100, 255, 218, 0.3);
+                          "
                           >NextJs</span
                         >
                         <span
                           class="skill-tag px-3 py-1 rounded-full text-sm border"
-                          style="background-color: #0a192f; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.3)"
+                          style="
+                            background-color: #0a192f;
+                            color: #ccd6f6;
+                            border-color: rgba(100, 255, 218, 0.3);
+                          "
                           >Material UI</span
                         >
                       </div>
@@ -766,23 +836,35 @@
                         Integrated Development Business Platform
                       </h5>
                       <p class="mb-3" style="color: #8892b0">
-                        Enterprise business platform with comprehensive
-                        features and analytics
+                        Enterprise business platform with comprehensive features
+                        and analytics
                       </p>
                       <div class="flex flex-wrap gap-2">
                         <span
                           class="skill-tag px-3 py-1 rounded-full text-sm border"
-                          style="background-color: #0a192f; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.3)"
+                          style="
+                            background-color: #0a192f;
+                            color: #ccd6f6;
+                            border-color: rgba(100, 255, 218, 0.3);
+                          "
                           >Laravel</span
                         >
                         <span
                           class="skill-tag px-3 py-1 rounded-full text-sm border"
-                          style="background-color: #0a192f; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.3)"
+                          style="
+                            background-color: #0a192f;
+                            color: #ccd6f6;
+                            border-color: rgba(100, 255, 218, 0.3);
+                          "
                           >Blade</span
                         >
                         <span
                           class="skill-tag px-3 py-1 rounded-full text-sm border"
-                          style="background-color: #0a192f; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.3)"
+                          style="
+                            background-color: #0a192f;
+                            color: #ccd6f6;
+                            border-color: rgba(100, 255, 218, 0.3);
+                          "
                           >Bootstrap</span
                         >
                       </div>
@@ -849,17 +931,29 @@
               <div class="flex flex-wrap gap-2 mb-6">
                 <span
                   class="skill-tag px-3 py-1 rounded-full text-sm border"
-                  style="background-color: #0a192f; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.3)"
+                  style="
+                    background-color: #0a192f;
+                    color: #ccd6f6;
+                    border-color: rgba(100, 255, 218, 0.3);
+                  "
                   >ReactJs</span
                 >
                 <span
                   class="skill-tag px-3 py-1 rounded-full text-sm border"
-                  style="background-color: #0a192f; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.3)"
+                  style="
+                    background-color: #0a192f;
+                    color: #ccd6f6;
+                    border-color: rgba(100, 255, 218, 0.3);
+                  "
                   >JavaScript</span
                 >
                 <span
                   class="skill-tag px-3 py-1 rounded-full text-sm border"
-                  style="background-color: #0a192f; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.3)"
+                  style="
+                    background-color: #0a192f;
+                    color: #ccd6f6;
+                    border-color: rgba(100, 255, 218, 0.3);
+                  "
                   >REST API</span
                 >
               </div>
@@ -899,30 +993,46 @@
                 BudgetApp
               </h3>
               <p class="mb-6 leading-relaxed" style="color: #8892b0">
-                A comprehensive budget management system with robust backend
-                and sleek frontend design. Features include user
-                authentication, expense tracking, and responsive design.
+                A comprehensive budget management system with robust backend and
+                sleek frontend design. Features include user authentication,
+                expense tracking, and responsive design.
               </p>
 
               <div class="flex flex-wrap gap-2 mb-6">
                 <span
                   class="skill-tag px-3 py-1 rounded-full text-sm border"
-                  style="background-color: #0a192f; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.3)"
+                  style="
+                    background-color: #0a192f;
+                    color: #ccd6f6;
+                    border-color: rgba(100, 255, 218, 0.3);
+                  "
                   >Laravel</span
                 >
                 <span
                   class="skill-tag px-3 py-1 rounded-full text-sm border"
-                  style="background-color: #0a192f; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.3)"
+                  style="
+                    background-color: #0a192f;
+                    color: #ccd6f6;
+                    border-color: rgba(100, 255, 218, 0.3);
+                  "
                   >Blade</span
                 >
                 <span
                   class="skill-tag px-3 py-1 rounded-full text-sm border"
-                  style="background-color: #0a192f; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.3)"
+                  style="
+                    background-color: #0a192f;
+                    color: #ccd6f6;
+                    border-color: rgba(100, 255, 218, 0.3);
+                  "
                   >Tailwind CSS</span
                 >
                 <span
                   class="skill-tag px-3 py-1 rounded-full text-sm border"
-                  style="background-color: #0a192f; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.3)"
+                  style="
+                    background-color: #0a192f;
+                    color: #ccd6f6;
+                    border-color: rgba(100, 255, 218, 0.3);
+                  "
                   >MySQL</span
                 >
               </div>
@@ -932,7 +1042,11 @@
       </section>
 
       <!-- Skills Section -->
-      <section id="skills" class="py-32 px-6 relative" style="background-color: rgba(17, 34, 64, 0.2)">
+      <section
+        id="skills"
+        class="py-32 px-6 relative"
+        style="background-color: rgba(17, 34, 64, 0.2)"
+      >
         <div class="max-w-7xl mx-auto">
           <div
             class="flex items-center gap-4 mb-16 skills-header"
@@ -956,37 +1070,61 @@
               <div class="space-y-3">
                 <div
                   class="skill-tag px-4 py-3 rounded-lg border hover:border-accent transition"
-                  style="background-color: #112240; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.2)"
+                  style="
+                    background-color: #112240;
+                    color: #ccd6f6;
+                    border-color: rgba(100, 255, 218, 0.2);
+                  "
                 >
                   JavaScript
                 </div>
                 <div
                   class="skill-tag px-4 py-3 rounded-lg border hover:border-accent transition"
-                  style="background-color: #112240; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.2)"
+                  style="
+                    background-color: #112240;
+                    color: #ccd6f6;
+                    border-color: rgba(100, 255, 218, 0.2);
+                  "
                 >
                   PHP
                 </div>
                 <div
                   class="skill-tag px-4 py-3 rounded-lg border hover:border-accent transition"
-                  style="background-color: #112240; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.2)"
+                  style="
+                    background-color: #112240;
+                    color: #ccd6f6;
+                    border-color: rgba(100, 255, 218, 0.2);
+                  "
                 >
                   SQL
                 </div>
                 <div
                   class="skill-tag px-4 py-3 rounded-lg border hover:border-accent transition"
-                  style="background-color: #112240; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.2)"
+                  style="
+                    background-color: #112240;
+                    color: #ccd6f6;
+                    border-color: rgba(100, 255, 218, 0.2);
+                  "
                 >
                   C++
                 </div>
                 <div
                   class="skill-tag px-4 py-3 rounded-lg border hover:border-accent transition"
-                  style="background-color: #112240; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.2)"
+                  style="
+                    background-color: #112240;
+                    color: #ccd6f6;
+                    border-color: rgba(100, 255, 218, 0.2);
+                  "
                 >
                   Java
                 </div>
                 <div
                   class="skill-tag px-4 py-3 rounded-lg border hover:border-accent transition"
-                  style="background-color: #112240; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.2)"
+                  style="
+                    background-color: #112240;
+                    color: #ccd6f6;
+                    border-color: rgba(100, 255, 218, 0.2);
+                  "
                 >
                   HTML/CSS
                 </div>
@@ -1006,43 +1144,71 @@
               <div class="space-y-3">
                 <div
                   class="skill-tag px-4 py-3 rounded-lg border hover:border-accent transition"
-                  style="background-color: #112240; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.2)"
+                  style="
+                    background-color: #112240;
+                    color: #ccd6f6;
+                    border-color: rgba(100, 255, 218, 0.2);
+                  "
                 >
                   React
                 </div>
                 <div
                   class="skill-tag px-4 py-3 rounded-lg border hover:border-accent transition"
-                  style="background-color: #112240; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.2)"
+                  style="
+                    background-color: #112240;
+                    color: #ccd6f6;
+                    border-color: rgba(100, 255, 218, 0.2);
+                  "
                 >
                   Next.js
                 </div>
                 <div
                   class="skill-tag px-4 py-3 rounded-lg border hover:border-accent transition"
-                  style="background-color: #112240; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.2)"
+                  style="
+                    background-color: #112240;
+                    color: #ccd6f6;
+                    border-color: rgba(100, 255, 218, 0.2);
+                  "
                 >
                   Laravel
                 </div>
                 <div
                   class="skill-tag px-4 py-3 rounded-lg border hover:border-accent transition"
-                  style="background-color: #112240; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.2)"
+                  style="
+                    background-color: #112240;
+                    color: #ccd6f6;
+                    border-color: rgba(100, 255, 218, 0.2);
+                  "
                 >
                   Tailwind CSS
                 </div>
                 <div
                   class="skill-tag px-4 py-3 rounded-lg border hover:border-accent transition"
-                  style="background-color: #112240; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.2)"
+                  style="
+                    background-color: #112240;
+                    color: #ccd6f6;
+                    border-color: rgba(100, 255, 218, 0.2);
+                  "
                 >
                   Bootstrap
                 </div>
                 <div
                   class="skill-tag px-4 py-3 rounded-lg border hover:border-accent transition"
-                  style="background-color: #112240; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.2)"
+                  style="
+                    background-color: #112240;
+                    color: #ccd6f6;
+                    border-color: rgba(100, 255, 218, 0.2);
+                  "
                 >
                   Material UI
                 </div>
                 <div
                   class="skill-tag px-4 py-3 rounded-lg border hover:border-accent transition"
-                  style="background-color: #112240; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.2)"
+                  style="
+                    background-color: #112240;
+                    color: #ccd6f6;
+                    border-color: rgba(100, 255, 218, 0.2);
+                  "
                 >
                   SWR
                 </div>
@@ -1062,55 +1228,91 @@
               <div class="space-y-3">
                 <div
                   class="skill-tag px-4 py-3 rounded-lg border hover:border-accent transition"
-                  style="background-color: #112240; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.2)"
+                  style="
+                    background-color: #112240;
+                    color: #ccd6f6;
+                    border-color: rgba(100, 255, 218, 0.2);
+                  "
                 >
                   <i class="fab fa-docker"></i> Docker
                 </div>
                 <div
                   class="skill-tag px-4 py-3 rounded-lg border hover:border-accent transition"
-                  style="background-color: #112240; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.2)"
+                  style="
+                    background-color: #112240;
+                    color: #ccd6f6;
+                    border-color: rgba(100, 255, 218, 0.2);
+                  "
                 >
                   <i class="fab fa-github"></i> GitHub Actions
                 </div>
                 <div
                   class="skill-tag px-4 py-3 rounded-lg border hover:border-accent transition"
-                  style="background-color: #112240; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.2)"
+                  style="
+                    background-color: #112240;
+                    color: #ccd6f6;
+                    border-color: rgba(100, 255, 218, 0.2);
+                  "
                 >
                   <i class="fab fa-aws"></i> EC2
                 </div>
                 <div
                   class="skill-tag px-4 py-3 rounded-lg border hover:border-accent transition"
-                  style="background-color: #112240; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.2)"
+                  style="
+                    background-color: #112240;
+                    color: #ccd6f6;
+                    border-color: rgba(100, 255, 218, 0.2);
+                  "
                 >
                   <i class="fab fa-aws"></i> CloudFront
                 </div>
                 <div
                   class="skill-tag px-4 py-3 rounded-lg border hover:border-accent transition"
-                  style="background-color: #112240; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.2)"
+                  style="
+                    background-color: #112240;
+                    color: #ccd6f6;
+                    border-color: rgba(100, 255, 218, 0.2);
+                  "
                 >
                   <i class="fab fa-aws"></i> S3
                 </div>
                 <div
                   class="skill-tag px-4 py-3 rounded-lg border hover:border-accent transition"
-                  style="background-color: #112240; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.2)"
+                  style="
+                    background-color: #112240;
+                    color: #ccd6f6;
+                    border-color: rgba(100, 255, 218, 0.2);
+                  "
                 >
                   <i class="fab fa-aws"></i> RDS
                 </div>
                 <div
                   class="skill-tag px-4 py-3 rounded-lg border hover:border-accent transition"
-                  style="background-color: #112240; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.2)"
+                  style="
+                    background-color: #112240;
+                    color: #ccd6f6;
+                    border-color: rgba(100, 255, 218, 0.2);
+                  "
                 >
                   <i class="fab fa-aws"></i> Route 53
                 </div>
                 <div
                   class="skill-tag px-4 py-3 rounded-lg border hover:border-accent transition"
-                  style="background-color: #112240; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.2)"
+                  style="
+                    background-color: #112240;
+                    color: #ccd6f6;
+                    border-color: rgba(100, 255, 218, 0.2);
+                  "
                 >
                   <i class="fab fa-aws"></i> IAM
                 </div>
                 <div
                   class="skill-tag px-4 py-3 rounded-lg border hover:border-accent transition"
-                  style="background-color: #112240; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.2)"
+                  style="
+                    background-color: #112240;
+                    color: #ccd6f6;
+                    border-color: rgba(100, 255, 218, 0.2);
+                  "
                 >
                   <i class="fab fa-aws"></i> MediaConvert
                 </div>
@@ -1130,43 +1332,71 @@
               <div class="space-y-3">
                 <div
                   class="skill-tag px-4 py-3 rounded-lg border hover:border-accent transition"
-                  style="background-color: #112240; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.2)"
+                  style="
+                    background-color: #112240;
+                    color: #ccd6f6;
+                    border-color: rgba(100, 255, 218, 0.2);
+                  "
                 >
                   <i class="fab fa-git-alt"></i> Git
                 </div>
                 <div
                   class="skill-tag px-4 py-3 rounded-lg border hover:border-accent transition"
-                  style="background-color: #112240; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.2)"
+                  style="
+                    background-color: #112240;
+                    color: #ccd6f6;
+                    border-color: rgba(100, 255, 218, 0.2);
+                  "
                 >
                   <i class="fab fa-github"></i> GitHub
                 </div>
                 <div
                   class="skill-tag px-4 py-3 rounded-lg border hover:border-accent transition"
-                  style="background-color: #112240; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.2)"
+                  style="
+                    background-color: #112240;
+                    color: #ccd6f6;
+                    border-color: rgba(100, 255, 218, 0.2);
+                  "
                 >
                   <i class="fab fa-gitlab"></i> GitLab
                 </div>
                 <div
                   class="skill-tag px-4 py-3 rounded-lg border hover:border-accent transition"
-                  style="background-color: #112240; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.2)"
+                  style="
+                    background-color: #112240;
+                    color: #ccd6f6;
+                    border-color: rgba(100, 255, 218, 0.2);
+                  "
                 >
                   <i class="fab fa-linux"></i> Linux
                 </div>
                 <div
                   class="skill-tag px-4 py-3 rounded-lg border hover:border-accent transition"
-                  style="background-color: #112240; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.2)"
+                  style="
+                    background-color: #112240;
+                    color: #ccd6f6;
+                    border-color: rgba(100, 255, 218, 0.2);
+                  "
                 >
                   <i class="fas fa-database"></i> PostgreSQL
                 </div>
                 <div
                   class="skill-tag px-4 py-3 rounded-lg border hover:border-accent transition"
-                  style="background-color: #112240; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.2)"
+                  style="
+                    background-color: #112240;
+                    color: #ccd6f6;
+                    border-color: rgba(100, 255, 218, 0.2);
+                  "
                 >
                   <i class="fas fa-database"></i> MySQL
                 </div>
                 <div
                   class="skill-tag px-4 py-3 rounded-lg border hover:border-accent transition"
-                  style="background-color: #112240; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.2)"
+                  style="
+                    background-color: #112240;
+                    color: #ccd6f6;
+                    border-color: rgba(100, 255, 218, 0.2);
+                  "
                 >
                   CI/CD
                 </div>
@@ -1196,10 +1426,10 @@
                 What I Offer
               </h3>
               <p class="text-lg leading-relaxed mb-8" style="color: #8892b0">
-                I specialize in creating tailored web solutions with full
-                DevOps integration. From concept to cloud deployment, I
-                deliver scalable, efficient, and automated applications that
-                meet your unique requirements.
+                I specialize in creating tailored web solutions with full DevOps
+                integration. From concept to cloud deployment, I deliver
+                scalable, efficient, and automated applications that meet your
+                unique requirements.
               </p>
 
               <div class="space-y-6">
@@ -1212,8 +1442,8 @@
                       Full Stack Development
                     </h4>
                     <p style="color: #8892b0">
-                      End-to-end application development with React,
-                      Next.js, and Laravel
+                      End-to-end application development with React, Next.js,
+                      and Laravel
                     </p>
                   </div>
                 </div>
@@ -1227,8 +1457,8 @@
                       Cloud Deployment & CI/CD
                     </h4>
                     <p style="color: #8892b0">
-                      Automated deployment pipelines with GitHub Actions and
-                      AWS services
+                      Automated deployment pipelines with GitHub Actions and AWS
+                      services
                     </p>
                   </div>
                 </div>
@@ -1242,8 +1472,8 @@
                       AWS Infrastructure Setup
                     </h4>
                     <p style="color: #8892b0">
-                      EC2, S3, CloudFront, RDS, Route 53, IAM, and
-                      MediaConvert configuration
+                      EC2, S3, CloudFront, RDS, Route 53, IAM, and MediaConvert
+                      configuration
                     </p>
                   </div>
                 </div>
@@ -1300,7 +1530,10 @@
             >
               <div
                 class="p-10 rounded-lg border"
-                style="background-color: #112240; border-color: rgba(100, 255, 218, 0.2)"
+                style="
+                  background-color: #112240;
+                  border-color: rgba(100, 255, 218, 0.2);
+                "
               >
                 <h3 class="text-3xl font-bold mb-8" style="color: #64ffda">
                   Tech Stack
@@ -1318,27 +1551,47 @@
                     <div class="flex flex-wrap gap-2">
                       <span
                         class="px-3 py-1 rounded-full text-sm border"
-                        style="background-color: #0a192f; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.3)"
+                        style="
+                          background-color: #0a192f;
+                          color: #ccd6f6;
+                          border-color: rgba(100, 255, 218, 0.3);
+                        "
                         >React</span
                       >
                       <span
                         class="px-3 py-1 rounded-full text-sm border"
-                        style="background-color: #0a192f; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.3)"
+                        style="
+                          background-color: #0a192f;
+                          color: #ccd6f6;
+                          border-color: rgba(100, 255, 218, 0.3);
+                        "
                         >Next.js</span
                       >
                       <span
                         class="px-3 py-1 rounded-full text-sm border"
-                        style="background-color: #0a192f; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.3)"
+                        style="
+                          background-color: #0a192f;
+                          color: #ccd6f6;
+                          border-color: rgba(100, 255, 218, 0.3);
+                        "
                         >Tailwind CSS</span
                       >
                       <span
                         class="px-3 py-1 rounded-full text-sm border"
-                        style="background-color: #0a192f; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.3)"
+                        style="
+                          background-color: #0a192f;
+                          color: #ccd6f6;
+                          border-color: rgba(100, 255, 218, 0.3);
+                        "
                         >Material UI</span
                       >
                       <span
                         class="px-3 py-1 rounded-full text-sm border"
-                        style="background-color: #0a192f; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.3)"
+                        style="
+                          background-color: #0a192f;
+                          color: #ccd6f6;
+                          border-color: rgba(100, 255, 218, 0.3);
+                        "
                         >SWR</span
                       >
                     </div>
@@ -1355,22 +1608,38 @@
                     <div class="flex flex-wrap gap-2">
                       <span
                         class="px-3 py-1 rounded-full text-sm border"
-                        style="background-color: #0a192f; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.3)"
+                        style="
+                          background-color: #0a192f;
+                          color: #ccd6f6;
+                          border-color: rgba(100, 255, 218, 0.3);
+                        "
                         >Laravel</span
                       >
                       <span
                         class="px-3 py-1 rounded-full text-sm border"
-                        style="background-color: #0a192f; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.3)"
+                        style="
+                          background-color: #0a192f;
+                          color: #ccd6f6;
+                          border-color: rgba(100, 255, 218, 0.3);
+                        "
                         >PHP</span
                       >
                       <span
                         class="px-3 py-1 rounded-full text-sm border"
-                        style="background-color: #0a192f; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.3)"
+                        style="
+                          background-color: #0a192f;
+                          color: #ccd6f6;
+                          border-color: rgba(100, 255, 218, 0.3);
+                        "
                         >RESTful APIs</span
                       >
                       <span
                         class="px-3 py-1 rounded-full text-sm border"
-                        style="background-color: #0a192f; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.3)"
+                        style="
+                          background-color: #0a192f;
+                          color: #ccd6f6;
+                          border-color: rgba(100, 255, 218, 0.3);
+                        "
                         >Node.js</span
                       >
                     </div>
@@ -1387,17 +1656,29 @@
                     <div class="flex flex-wrap gap-2">
                       <span
                         class="px-3 py-1 rounded-full text-sm border"
-                        style="background-color: #0a192f; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.3)"
+                        style="
+                          background-color: #0a192f;
+                          color: #ccd6f6;
+                          border-color: rgba(100, 255, 218, 0.3);
+                        "
                         >MySQL</span
                       >
                       <span
                         class="px-3 py-1 rounded-full text-sm border"
-                        style="background-color: #0a192f; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.3)"
+                        style="
+                          background-color: #0a192f;
+                          color: #ccd6f6;
+                          border-color: rgba(100, 255, 218, 0.3);
+                        "
                         >PostgreSQL</span
                       >
                       <span
                         class="px-3 py-1 rounded-full text-sm border"
-                        style="background-color: #0a192f; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.3)"
+                        style="
+                          background-color: #0a192f;
+                          color: #ccd6f6;
+                          border-color: rgba(100, 255, 218, 0.3);
+                        "
                         >RDS</span
                       >
                     </div>
@@ -1414,53 +1695,91 @@
                     <div class="flex flex-wrap gap-2">
                       <span
                         class="px-3 py-1 rounded-full text-sm border"
-                        style="background-color: #0a192f; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.3)"
+                        style="
+                          background-color: #0a192f;
+                          color: #ccd6f6;
+                          border-color: rgba(100, 255, 218, 0.3);
+                        "
                         >Docker</span
                       >
                       <span
                         class="px-3 py-1 rounded-full text-sm border"
-                        style="background-color: #0a192f; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.3)"
+                        style="
+                          background-color: #0a192f;
+                          color: #ccd6f6;
+                          border-color: rgba(100, 255, 218, 0.3);
+                        "
                         >GitHub Actions</span
                       >
                       <span
                         class="px-3 py-1 rounded-full text-sm border"
-                        style="background-color: #0a192f; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.3)"
+                        style="
+                          background-color: #0a192f;
+                          color: #ccd6f6;
+                          border-color: rgba(100, 255, 218, 0.3);
+                        "
                         >AWS EC2</span
                       >
                       <span
                         class="px-3 py-1 rounded-full text-sm border"
-                        style="background-color: #0a192f; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.3)"
+                        style="
+                          background-color: #0a192f;
+                          color: #ccd6f6;
+                          border-color: rgba(100, 255, 218, 0.3);
+                        "
                         >CloudFront</span
                       >
                       <span
                         class="px-3 py-1 rounded-full text-sm border"
-                        style="background-color: #0a192f; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.3)"
+                        style="
+                          background-color: #0a192f;
+                          color: #ccd6f6;
+                          border-color: rgba(100, 255, 218, 0.3);
+                        "
                         >S3</span
                       >
                       <span
                         class="px-3 py-1 rounded-full text-sm border"
-                        style="background-color: #0a192f; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.3)"
+                        style="
+                          background-color: #0a192f;
+                          color: #ccd6f6;
+                          border-color: rgba(100, 255, 218, 0.3);
+                        "
                         >Route 53</span
                       >
                       <span
                         class="px-3 py-1 rounded-full text-sm border"
-                        style="background-color: #0a192f; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.3)"
+                        style="
+                          background-color: #0a192f;
+                          color: #ccd6f6;
+                          border-color: rgba(100, 255, 218, 0.3);
+                        "
                         >IAM</span
                       >
                       <span
                         class="px-3 py-1 rounded-full text-sm border"
-                        style="background-color: #0a192f; color: #ccd6f6; border-color: rgba(100, 255, 218, 0.3)"
+                        style="
+                          background-color: #0a192f;
+                          color: #ccd6f6;
+                          border-color: rgba(100, 255, 218, 0.3);
+                        "
                         >MediaConvert</span
                       >
                     </div>
                   </div>
                 </div>
 
-                <div class="mt-10 pt-8 border-t" style="border-color: rgba(100, 255, 218, 0.2)">
+                <div
+                  class="mt-10 pt-8 border-t"
+                  style="border-color: rgba(100, 255, 218, 0.2)"
+                >
                   <p class="text-center" style="color: #8892b0">
-                    <i class="fas fa-rocket" style="color: #64ffda; margin-right: 8px;"></i>
-                    Ready to deploy your project to the cloud? Let's build
-                    and ship together!
+                    <i
+                      class="fas fa-rocket"
+                      style="color: #64ffda; margin-right: 8px"
+                    ></i>
+                    Ready to deploy your project to the cloud? Let's build and
+                    ship together!
                   </p>
                 </div>
               </div>
@@ -1478,7 +1797,12 @@
             <div class="grid md:grid-cols-3 gap-6">
               <div
                 class="p-6 rounded-lg border achievement-item"
-                style="background-color: #112240; border-color: rgba(100, 255, 218, 0.2); opacity: 0; transform: translateY(20px)"
+                style="
+                  background-color: #112240;
+                  border-color: rgba(100, 255, 218, 0.2);
+                  opacity: 0;
+                  transform: translateY(20px);
+                "
               >
                 <div class="text-4xl mb-4">🥈</div>
                 <h4 class="text-xl font-bold mb-2" style="color: #e6f1ff">
@@ -1489,7 +1813,12 @@
 
               <div
                 class="p-6 rounded-lg border achievement-item"
-                style="background-color: #112240; border-color: rgba(100, 255, 218, 0.2); opacity: 0; transform: translateY(20px)"
+                style="
+                  background-color: #112240;
+                  border-color: rgba(100, 255, 218, 0.2);
+                  opacity: 0;
+                  transform: translateY(20px);
+                "
               >
                 <div class="text-4xl mb-4">🥈</div>
                 <h4 class="text-xl font-bold mb-2" style="color: #e6f1ff">
@@ -1500,7 +1829,12 @@
 
               <div
                 class="p-6 rounded-lg border achievement-item"
-                style="background-color: #112240; border-color: rgba(100, 255, 218, 0.2); opacity: 0; transform: translateY(20px)"
+                style="
+                  background-color: #112240;
+                  border-color: rgba(100, 255, 218, 0.2);
+                  opacity: 0;
+                  transform: translateY(20px);
+                "
               >
                 <div class="text-4xl mb-4">🏆</div>
                 <h4 class="text-xl font-bold mb-2" style="color: #e6f1ff">
@@ -1514,18 +1848,20 @@
       </section>
 
       <!-- Contact Section -->
-      <section id="contact" class="py-32 px-6 relative" style="background-color: rgba(17, 34, 64, 0.2)">
+      <section
+        id="contact"
+        class="py-32 px-6 relative"
+        style="background-color: rgba(17, 34, 64, 0.2)"
+      >
         <div class="max-w-4xl mx-auto text-center">
           <div class="contact-header" style="opacity: 0">
-            <h2 class="text-5xl md:text-6xl font-bold mb-8">
-              Get In Touch
-            </h2>
+            <h2 class="text-5xl md:text-6xl font-bold mb-8">Get In Touch</h2>
             <p
               class="text-xl max-w-2xl mx-auto mb-12 leading-relaxed"
               style="color: #8892b0"
             >
-              Whether you have a question or just want to say hi, I'll try
-              my best to get back to you!
+              Whether you have a question or just want to say hi, I'll try my
+              best to get back to you!
             </p>
           </div>
 
@@ -1535,12 +1871,17 @@
           >
             <div
               class="p-8 rounded-lg border hover:border-accent/40 transition-all"
-              style="background-color: #112240; border-color: rgba(100, 255, 218, 0.2)"
+              style="
+                background-color: #112240;
+                border-color: rgba(100, 255, 218, 0.2);
+              "
             >
               <div class="text-4xl mb-4" style="color: #64ffda">
                 <i class="fas fa-envelope"></i>
               </div>
-              <h3 class="text-xl font-bold mb-3" style="color: #e6f1ff">Email</h3>
+              <h3 class="text-xl font-bold mb-3" style="color: #e6f1ff">
+                Email
+              </h3>
               <a
                 href="mailto:emran@example.com"
                 class="hover:text-accent-alt transition"
@@ -1552,12 +1893,17 @@
 
             <div
               class="p-8 rounded-lg border hover:border-accent/40 transition-all"
-              style="background-color: #112240; border-color: rgba(100, 255, 218, 0.2)"
+              style="
+                background-color: #112240;
+                border-color: rgba(100, 255, 218, 0.2);
+              "
             >
               <div class="text-4xl mb-4" style="color: #64ffda">
                 <i class="fas fa-phone"></i>
               </div>
-              <h3 class="text-xl font-bold mb-3" style="color: #e6f1ff">Phone</h3>
+              <h3 class="text-xl font-bold mb-3" style="color: #e6f1ff">
+                Phone
+              </h3>
               <div class="space-y-2">
                 <a
                   href="tel:+8801797753865"
@@ -1585,7 +1931,11 @@
               href="https://github.com/Emran-Ali"
               target="_blank"
               class="w-14 h-14 flex items-center justify-center rounded-full border hover:border-accent hover:transform hover:scale-110 transition"
-              style="background-color: #112240; border-color: rgba(100, 255, 218, 0.2); color: #ccd6f6"
+              style="
+                background-color: #112240;
+                border-color: rgba(100, 255, 218, 0.2);
+                color: #ccd6f6;
+              "
             >
               <i class="fab fa-github text-2xl"></i>
             </a>
@@ -1593,7 +1943,11 @@
               href="https://www.linkedin.com/in/itsemran/"
               target="_blank"
               class="w-14 h-14 flex items-center justify-center rounded-full border hover:border-accent hover:transform hover:scale-110 transition"
-              style="background-color: #112240; border-color: rgba(100, 255, 218, 0.2); color: #ccd6f6"
+              style="
+                background-color: #112240;
+                border-color: rgba(100, 255, 218, 0.2);
+                color: #ccd6f6;
+              "
             >
               <i class="fab fa-linkedin-in text-2xl"></i>
             </a>
@@ -1610,13 +1964,18 @@
       </section>
 
       <!-- Footer -->
-      <footer class="py-8 px-6 border-t" style="border-color: rgba(100, 255, 218, 0.1)">
+      <footer
+        class="py-8 px-6 border-t"
+        style="border-color: rgba(100, 255, 218, 0.1)"
+      >
         <div class="max-w-7xl mx-auto text-center">
           <p style="color: #8892b0">
             Designed & Built by
             <span style="color: #64ffda">Md Emran Ali</span>
           </p>
-          <p class="mt-2 text-sm" style="color: #8892b0">© 2024 All rights reserved</p>
+          <p class="mt-2 text-sm" style="color: #8892b0">
+            © 2024 All rights reserved
+          </p>
         </div>
       </footer>
     </div>
@@ -1625,14 +1984,23 @@
       gsap.registerPlugin(ScrollTrigger);
 
       // Hero entrance animations
-      gsap.fromTo(".hero-photo", 
+      gsap.fromTo(
+        ".hero-photo",
         { opacity: 0, scale: 0.85 },
-        { opacity: 1, scale: 1, duration: 1, ease: "power3.out", delay: 0.2 }
+        { opacity: 1, scale: 1, duration: 1, ease: "power3.out", delay: 0.2 },
       );
 
-      gsap.fromTo(".hero-content > *", 
+      gsap.fromTo(
+        ".hero-content > *",
         { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.8, stagger: 0.15, ease: "power3.out", delay: 0.3 }
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.15,
+          ease: "power3.out",
+          delay: 0.3,
+        },
       );
 
       // Main scroll trigger for hero reveal with snap
@@ -1650,28 +2018,46 @@
           duration: 0.6,
           ease: "power2.inOut",
           directional: false,
-          inertia: false
+          inertia: false,
         },
         onUpdate: (self) => {
           const progress = self.progress;
-          
+
           // If progress > 0.5, hide hero and show nav
           if (progress > 0.5) {
             if (heroVisible) {
               heroVisible = false;
-              gsap.to("#hero", { opacity: 0, duration: 0.3, ease: "power2.out" });
-              gsap.to("#main-nav", { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" });
+              gsap.to("#hero", {
+                opacity: 0,
+                duration: 0.3,
+                ease: "power2.out",
+              });
+              gsap.to("#main-nav", {
+                opacity: 1,
+                y: 0,
+                duration: 0.3,
+                ease: "power2.out",
+              });
               document.getElementById("hero").style.pointerEvents = "none";
             }
           } else {
             if (!heroVisible) {
               heroVisible = true;
-              gsap.to("#hero", { opacity: 1, duration: 0.3, ease: "power2.out" });
-              gsap.to("#main-nav", { opacity: 0, y: -20, duration: 0.3, ease: "power2.out" });
+              gsap.to("#hero", {
+                opacity: 1,
+                duration: 0.3,
+                ease: "power2.out",
+              });
+              gsap.to("#main-nav", {
+                opacity: 0,
+                y: -20,
+                duration: 0.3,
+                ease: "power2.out",
+              });
               document.getElementById("hero").style.pointerEvents = "auto";
             }
           }
-        }
+        },
       });
 
       // Navigation Animation
@@ -1688,10 +2074,10 @@
           trigger: ".about-header",
           start: "top 85%",
           end: "top 60%",
-          toggleActions: "play none none reverse"
+          toggleActions: "play none none reverse",
         },
         opacity: 1,
-        duration: 0.6
+        duration: 0.6,
       });
 
       gsap.to(".about-text", {
@@ -1699,12 +2085,12 @@
           trigger: ".about-text",
           start: "top 90%",
           end: "top 60%",
-          toggleActions: "play none none reverse"
+          toggleActions: "play none none reverse",
         },
         opacity: 1,
         x: 0,
         duration: 0.6,
-        ease: "power3.out"
+        ease: "power3.out",
       });
 
       gsap.to(".about-details", {
@@ -1712,12 +2098,12 @@
           trigger: ".about-details",
           start: "top 90%",
           end: "top 60%",
-          toggleActions: "play none none reverse"
+          toggleActions: "play none none reverse",
         },
         opacity: 1,
         x: 0,
         duration: 0.6,
-        ease: "power3.out"
+        ease: "power3.out",
       });
 
       // Experience Section Animation
@@ -1726,10 +2112,10 @@
           trigger: ".exp-header",
           start: "top 85%",
           end: "top 60%",
-          toggleActions: "play none none reverse"
+          toggleActions: "play none none reverse",
         },
         opacity: 1,
-        duration: 0.6
+        duration: 0.6,
       });
 
       document.querySelectorAll(".exp-item").forEach((item) => {
@@ -1738,12 +2124,12 @@
             trigger: item,
             start: "top 95%",
             end: "top 70%",
-            toggleActions: "play none none reverse"
+            toggleActions: "play none none reverse",
           },
           opacity: 1,
           y: 0,
           duration: 0.6,
-          ease: "power3.out"
+          ease: "power3.out",
         });
       });
 
@@ -1753,10 +2139,10 @@
           trigger: ".projects-header",
           start: "top 85%",
           end: "top 60%",
-          toggleActions: "play none none reverse"
+          toggleActions: "play none none reverse",
         },
         opacity: 1,
-        duration: 0.6
+        duration: 0.6,
       });
 
       document.querySelectorAll(".project-item").forEach((item) => {
@@ -1765,12 +2151,12 @@
             trigger: item,
             start: "top 95%",
             end: "top 70%",
-            toggleActions: "play none none reverse"
+            toggleActions: "play none none reverse",
           },
           opacity: 1,
           y: 0,
           duration: 0.6,
-          ease: "power3.out"
+          ease: "power3.out",
         });
       });
 
@@ -1779,10 +2165,10 @@
           trigger: ".achievements-header",
           start: "top 85%",
           end: "top 60%",
-          toggleActions: "play none none reverse"
+          toggleActions: "play none none reverse",
         },
         opacity: 1,
-        duration: 0.6
+        duration: 0.6,
       });
 
       document.querySelectorAll(".achievement-item").forEach((item) => {
@@ -1791,12 +2177,12 @@
             trigger: item,
             start: "top 95%",
             end: "top 75%",
-            toggleActions: "play none none reverse"
+            toggleActions: "play none none reverse",
           },
           opacity: 1,
           y: 0,
           duration: 0.6,
-          ease: "power3.out"
+          ease: "power3.out",
         });
       });
 
@@ -1806,10 +2192,10 @@
           trigger: ".skills-header",
           start: "top 85%",
           end: "top 60%",
-          toggleActions: "play none none reverse"
+          toggleActions: "play none none reverse",
         },
         opacity: 1,
-        duration: 0.6
+        duration: 0.6,
       });
 
       document.querySelectorAll(".skill-category").forEach((item) => {
@@ -1818,12 +2204,12 @@
             trigger: item,
             start: "top 95%",
             end: "top 75%",
-            toggleActions: "play none none reverse"
+            toggleActions: "play none none reverse",
           },
           opacity: 1,
           y: 0,
           duration: 0.6,
-          ease: "power3.out"
+          ease: "power3.out",
         });
       });
 
@@ -1833,10 +2219,10 @@
           trigger: ".solutions-header",
           start: "top 85%",
           end: "top 60%",
-          toggleActions: "play none none reverse"
+          toggleActions: "play none none reverse",
         },
         opacity: 1,
-        duration: 0.6
+        duration: 0.6,
       });
 
       document.querySelectorAll(".solution-item").forEach((item) => {
@@ -1845,12 +2231,12 @@
             trigger: item,
             start: "top 95%",
             end: "top 70%",
-            toggleActions: "play none none reverse"
+            toggleActions: "play none none reverse",
           },
           opacity: 1,
           x: 0,
           duration: 0.6,
-          ease: "power3.out"
+          ease: "power3.out",
         });
       });
 
@@ -1860,10 +2246,10 @@
           trigger: ".contact-header",
           start: "top 85%",
           end: "top 60%",
-          toggleActions: "play none none reverse"
+          toggleActions: "play none none reverse",
         },
         opacity: 1,
-        duration: 0.6
+        duration: 0.6,
       });
 
       gsap.to(".contact-info", {
@@ -1871,11 +2257,11 @@
           trigger: ".contact-info",
           start: "top 90%",
           end: "top 65%",
-          toggleActions: "play none none reverse"
+          toggleActions: "play none none reverse",
         },
         opacity: 1,
         duration: 0.6,
-        ease: "power3.out"
+        ease: "power3.out",
       });
 
       gsap.to(".contact-social", {
@@ -1883,11 +2269,11 @@
           trigger: ".contact-social",
           start: "top 95%",
           end: "top 70%",
-          toggleActions: "play none none reverse"
+          toggleActions: "play none none reverse",
         },
         opacity: 1,
         duration: 0.6,
-        ease: "power3.out"
+        ease: "power3.out",
       });
 
       gsap.to(".contact-btn", {
@@ -1895,11 +2281,11 @@
           trigger: ".contact-btn",
           start: "top 95%",
           end: "top 75%",
-          toggleActions: "play none none reverse"
+          toggleActions: "play none none reverse",
         },
         opacity: 1,
         duration: 0.6,
-        ease: "power3.out"
+        ease: "power3.out",
       });
 
       // Smooth scroll for anchor links
@@ -1915,17 +2301,24 @@
       });
 
       // Click on logo scrolls to top
-      document.getElementById("nav-logo").addEventListener("click", function(e) {
-        e.preventDefault();
-        window.scrollTo({ top: 0, behavior: "smooth" });
-        // Show hero again
-        if (!heroVisible) {
-          heroVisible = true;
-          gsap.to("#hero", { opacity: 1, duration: 0.3, ease: "power2.out" });
-          gsap.to("#main-nav", { opacity: 0, y: -20, duration: 0.3, ease: "power2.out" });
-          document.getElementById("hero").style.pointerEvents = "auto";
-        }
-      });
+      document
+        .getElementById("nav-logo")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+          // Show hero again
+          if (!heroVisible) {
+            heroVisible = true;
+            gsap.to("#hero", { opacity: 1, duration: 0.3, ease: "power2.out" });
+            gsap.to("#main-nav", {
+              opacity: 0,
+              y: -20,
+              duration: 0.3,
+              ease: "power2.out",
+            });
+            document.getElementById("hero").style.pointerEvents = "auto";
+          }
+        });
     </script>
   </body>
 </html>
